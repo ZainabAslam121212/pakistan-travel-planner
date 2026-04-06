@@ -1,0 +1,141 @@
+[
+    {
+        "packageID": 1,
+        "name": "Northern Adventure Expedition",
+        "type": "premade",
+        "category": "adventure",
+        "region": "northern",
+        "duration_days": 7,
+        "price": 45000,
+        "description": "Comprehensive adventure tour covering Fairy Meadows, Nanga Parbat, Attabad Lake and Upper Hunza",
+        "attractions": [1, 3, 11],
+        "hotels": [20],
+        "activities": [
+            {"name": "Fairy Meadows Hike", "duration": "6 hours", "type": "hiking"},
+            {"name": "Nanga Parbat Base Camp", "duration": "8 hours", "type": "trekking"},
+            {"name": "Attabad Lake Boat Ride", "duration": "3 hours", "type": "boating"}
+        ],
+        "inclusions": ["Accommodation", "Meals", "Transport", "Guide"],
+        "best_for": ["Adventure enthusiasts", "Photographers", "Nature lovers"],
+        "image_url": "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        "packageID": 2,
+        "name": "Punjab Cultural Heritage Tour",
+        "type": "premade",
+        "category": "cultural",
+        "region": "punjab",
+        "duration_days": 5,
+        "price": 25000,
+        "description": "Explore the rich cultural heritage of Punjab through historical sites and local experiences",
+        "attractions": [2, 4, 9],
+        "hotels": [1],
+        "activities": [
+            {"name": "Lahore Fort Tour", "duration": "3 hours", "type": "historical"},
+            {"name": "Badshahi Mosque Visit", "duration": "2 hours", "type": "religious"},
+            {"name": "Local Food Tasting", "duration": "2 hours", "type": "culinary"}
+        ],
+        "inclusions": ["Accommodation", "Breakfast", "Transport", "Entrance Fees"],
+        "best_for": ["History buffs", "Culture enthusiasts", "Families"],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Badshahi_Mosque_front_picture.jpg/1200px-Badshahi_Mosque_front_picture.jpg"
+    },
+    {
+        "packageID": 3,
+        "name": "Sindh Historical Journey",
+        "type": "premade",
+        "category": "historical",
+        "region": "sindh",
+        "duration_days": 4,
+        "price": 20000,
+        "description": "Discover ancient civilizations and historical sites of Sindh",
+        "attractions": [5, 10],
+        "hotels": [14],
+        "activities": [
+            {"name": "Mohenjo-daro Exploration", "duration": "4 hours", "type": "archaeological"},
+            {"name": "Makkli Necropolis Tour", "duration": "3 hours", "type": "historical"}
+        ],
+        "inclusions": ["Accommodation", "Breakfast", "Transport", "Guide"],
+        "best_for": ["History lovers", "Archaeology enthusiasts"],
+        "image_url": "https://eagleeye.com.pk/pttl/wp-content/uploads/2017/02/Remains-tower-Mohenjo-daro-province-Pakistan-Sindh.jpg"
+    },
+    {
+        "packageID": 4,
+        "name": "KPK Valley Explorer",
+        "type": "premade",
+        "category": "adventure",
+        "region": "kpk",
+        "duration_days": 6,
+        "price": 35000,
+        "description": "Explore the beautiful valleys and cultural heritage of Khyber Pakhtunkhwa",
+        "attractions": [6, 7, 13],
+        "hotels": [13],
+        "activities": [
+            {"name": "Kumrat Valley Trekking", "duration": "5 hours", "type": "hiking"},
+            {"name": "Swat Valley Sightseeing", "duration": "6 hours", "type": "sightseeing"},
+            {"name": "Local Cultural Experience", "duration": "3 hours", "type": "cultural"}
+        ],
+        "inclusions": ["Accommodation", "Meals", "Transport", "Guide", "Entrance Fees"],
+        "best_for": ["Nature lovers", "Adventure seekers", "Cultural enthusiasts"],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Evening_shades.jpg"
+    },
+    {
+        "packageID": 5,
+        "name": "Swat Valley Retreat",
+        "type": "premade",
+        "category": "cultural",
+        "region": "kpk",
+        "duration_days": 5,
+        "price": 32000,
+        "description": "Experience the beauty and culture of Swat Valley with comfortable stays",
+        "attractions": [7, 13],
+        "hotels": [4],
+        "activities": [
+            {"name": "Mingora City Tour", "duration": "4 hours", "type": "sightseeing"},
+            {"name": "Malam Jabba Visit", "duration": "5 hours", "type": "adventure"},
+            {"name": "Local Handicraft Shopping", "duration": "2 hours", "type": "shopping"}
+        ],
+        "inclusions": ["Hotel Accommodation", "All Meals", "Transport", "Cultural Guide"],
+        "best_for": ["Families", "Culture enthusiasts", "Nature lovers"],
+        "image_url": "https://traveloguers.com/wp-content/uploads/2024/02/Mahodand-Lake-Kalam-Swat.webp"
+    },
+    {
+        "packageID": 6,
+        "name": "Karachi Coastal Experience",
+        "type": "premade",
+        "category": "beach",
+        "region": "sindh",
+        "duration_days": 4,
+        "price": 28000,
+        "description": "Explore the coastal beauty of Karachi with beach activities and city tours",
+        "attractions": [],
+        "hotels": [3],
+        "activities": [
+            {"name": "Clifton Beach Visit", "duration": "3 hours", "type": "beach"},
+            {"name": "Seafood Dinner at Boat Basin", "duration": "2 hours", "type": "culinary"},
+            {"name": "Manora Island Boat Ride", "duration": "4 hours", "type": "boating"}
+        ],
+        "inclusions": ["Hotel Accommodation", "Breakfast", "Transport", "Beach Activities"],
+        "best_for": ["Beach lovers", "Couples", "Families"],
+        "image_url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        "packageID": 7,
+        "name": "Sindh Heritage Trail",
+        "type": "premade",
+        "category": "historical",
+        "region": "sindh",
+        "duration_days": 5,
+        "price": 38000,
+        "description": "Journey through ancient civilizations and historical sites of Sindh",
+        "attractions": [5, 10],
+        "hotels": [14],
+        "activities": [
+            {"name": "Mohenjo-daro Archaeological Tour", "duration": "5 hours", "type": "archaeological"},
+            {"name": "Makkli Necropolis Exploration", "duration": "4 hours", "type": "historical"},
+            {"name": "Thatta Heritage Walk", "duration": "3 hours", "type": "cultural"}
+        ],
+        "inclusions": ["Accommodation", "All Meals", "Transport", "Expert Guide", "Entrance Fees"],
+        "best_for": ["History enthusiasts", "Archaeology lovers", "Cultural explorers"],
+        "image_url": "https://images.unsplash.com/photo-1484557985045-edf25e08da73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    }
+]

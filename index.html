@@ -1,0 +1,3913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Travel Planner | Explore Beautiful Destinations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #fbbc05;
+            --dark: #202124;
+            --light: #f8f9fa;
+            --gray: #5f6368;
+            --border: #dadce0;
+            --hotel-color: #9c27b0;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), #0d47a1);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+
+        .btn-hotel {
+            background-color: var(--hotel-color);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .card p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .hotel-price {
+            color: var(--hotel-color);
+        }
+
+        .btn-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .btn-link:hover {
+            color: var(--secondary);
+        }
+
+        /* Hotel specific styles */
+        .hotel-card .card-meta span:first-child {
+            color: var(--hotel-color);
+            font-weight: 500;
+        }
+
+        .hotel-card .card-meta span:last-child {
+            color: #FF9800;
+            font-weight: 500;
+        }
+
+        .hotel-rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .star-filled {
+            color: gold;
+        }
+
+        .star-empty {
+            color: #ddd;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Custom Package Generator */
+        .package-generator {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .preferences-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Package Details */
+        .package-details {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .package-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .package-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .package-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .attractions-list, .hotels-list {
+            margin-bottom: 2rem;
+        }
+
+        .list-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-img {
+            width: 100px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .item-content h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .item-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .activities-list {
+            list-style-type: none;
+        }
+
+        .activities-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .activities-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: #bdc1c6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #3c4043;
+            color: #9aa0a6;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .package-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        /* Loading States */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid #c62828;
+        }
+
+        .success-message {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid #2e7d32;
+        }
+
+        .info-message {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid #1976d2;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        /* Saved attractions specific styles */
+        .saved-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(233, 30, 99, 0.9);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        /* Package Modal Specific Styles */
+        #package-modal .modal-content {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #package-modal .package-tag {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+        }
+
+        /* Save Package Button Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        button[onclick*="savePackageToWishlist"]:hover {
+            animation: pulse 0.3s ease;
+        }
+
+        /* Saved Package Badge */
+        .saved-package-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #4CAF50;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        button[onclick*="saveToWishlist"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        #saved-attractions-tab.active {
+            color: #e91e63;
+            border-bottom-color: #e91e63;
+        }
+
+        #saved-attractions-tab:hover {
+            color: #e91e63;
+        }
+
+        #no-saved-attractions {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* Hotel Modal Styles */
+        .hotel-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .hotel-modal {
+            background: white;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+
+        .hotel-modal-header {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .hotel-modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hotel-modal-header-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 25px;
+            color: white;
+        }
+
+        .hotel-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .hotel-modal-body {
+            padding: 30px;
+            overflow-y: auto;
+            max-height: calc(90vh - 250px);
+        }
+
+        .hotel-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .hotel-detail-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--hotel-color);
+        }
+
+        .hotel-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .amenity-tag {
+            background: #f3e5f5;
+            color: var(--hotel-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .room-options {
+            margin-bottom: 25px;
+        }
+
+        .room-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .room-option:hover {
+            border-color: var(--hotel-color);
+            background: #f9f0ff;
+        }
+
+        .room-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--hotel-color);
+        }
+
+        /* Auth Modal Styles */
+        .auth-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .auth-modal {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+
+        .auth-modal-header {
+            background: linear-gradient(135deg, var(--primary), #0d47a1);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .auth-modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .auth-modal-body {
+            padding: 30px;
+        }
+
+        .auth-modal-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--gray);
+        }
+
+        .auth-modal-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-modal-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .auth-modal-close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        /* Toast Message */
+        .toast-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 4000;
+            max-width: 400px;
+            animation: slideInRight 0.3s ease;
+        }
+
+        .toast-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .toast-success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            border-left: 4px solid #2e7d32;
+        }
+
+        .toast-error {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #c62828;
+        }
+
+        .toast-info {
+            background: #e3f2fd;
+            color: #1976d2;
+            border-left: 4px solid #1976d2;
+        }
+
+        /* Auth buttons in header when logged in */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+
+        .user-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* Disabled button styles */
+        button[disabled] {
+            opacity: 0.6 !important;
+            cursor: not-allowed !important;
+        }
+
+        button[disabled]:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Animations */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-mountain"></i>
+                    <span>Pakistan Travel Planner</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">Home</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#attractions">Attractions</a></li>
+                        <li><a href="#hotels">Hotels</a></li>
+                        <li><a href="#custom">Custom Plan</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons" id="auth-buttons">
+                    <!-- This will be populated by JavaScript -->
+                    <a href="#" class="btn btn-outline" onclick="showLoginModal()">Login</a>
+                    <a href="#" class="btn btn-primary" onclick="showRegisterModal()">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Discover the Beauty of Pakistan</h1>
+            <p>Explore breathtaking landscapes, rich culture, and historical sites with our personalized travel packages</p>
+            <div class="search-box">
+                <input type="text" id="global-search" placeholder="Search destinations, attractions, hotels, or packages...">
+                <button onclick="searchAll()"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-made Packages Section -->
+    <section id="packages">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Travel Packages</h2>
+                <p>Carefully curated packages for different regions and interests</p>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="all">All Packages</div>
+                <div class="tab" data-tab="northern">Northern Areas</div>
+                <div class="tab" data-tab="punjab">Punjab</div>
+                <div class="tab" data-tab="sindh">Sindh</div>
+                <div class="tab" data-tab="kpk">KPK</div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="packages-loading" class="spinner" style="display: none;"></div>
+
+            <!-- Packages Container -->
+            <div id="packages-container">
+                <!-- Packages will be loaded here by JavaScript -->
+            </div>
+
+            <!-- Error Message -->
+            <div id="packages-error" class="error-message" style="display: none;">
+                Failed to load packages. Please try again later.
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Attractions Section -->
+    <section id="attractions" style="background-color: #f0f4f8;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Top Attractions in Pakistan</h2>
+                <p>Discover the most popular destinations across the country</p>
+            </div>
+
+            <!-- Attraction Tabs -->
+           <div class="tabs">
+                <div class="tab active" data-tab="all-attractions" onclick="showAllAttractions()">All Attractions</div>
+                <div class="tab" data-tab="saved-attractions" onclick="showSavedAttractions()" id="saved-attractions-tab">
+                    <i class="fas fa-heart" style="color: #e91e63; margin-right: 8px;"></i>
+                    Saved Attractions
+                    <span id="saved-count" style="display: none; margin-left: 8px; background: #e91e63; color: white;
+                          padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;"></span>
+                </div>
+            </div>
+
+            <!-- Package Tabs -->
+            <div class="tabs" id="packages-tabs-section" style="display: none;">
+                <div class="tab active" data-tab="all-packages" onclick="showAllPackages()">All Packages</div>
+                <div class="tab" data-tab="saved-packages" onclick="showSavedPackages()" id="saved-packages-tab">
+                    <i class="fas fa-bookmark" style="color: #4CAF50; margin-right: 8px;"></i>
+                    Saved Packages
+                    <span id="saved-packages-count" style="margin-left: 8px; background: #4CAF50; color: white;
+                          padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">0</span>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="attractions-loading" class="spinner" style="display: none;"></div>
+
+            <!-- All Attractions Container -->
+            <div class="cards-grid" id="attractions-container">
+                <!-- All attractions will be loaded here by JavaScript -->
+            </div>
+
+            <!-- Saved Attractions Container (Initially Hidden) -->
+            <div class="cards-grid" id="saved-attractions-container" style="display: none;">
+                <!-- Saved attractions will be loaded here -->
+            </div>
+
+            <!-- Empty state for saved attractions -->
+            <div id="no-saved-attractions" style="display: none; text-align: center; padding: 3rem; color: var(--gray);">
+                <i class="fas fa-heart" style="font-size: 3rem; color: #ffcdd2; margin-bottom: 1rem;"></i>
+                <h3 style="color: var(--dark); margin-bottom: 1rem;">No Saved Attractions Yet</h3>
+                <p>Save attractions by clicking the "Save" button when viewing attraction details.</p>
+                <button class="btn btn-primary" onclick="showAllAttractions()"
+                        style="margin-top: 1rem; padding: 10px 20px;">
+                    <i class="fas fa-compass"></i> Explore Attractions
+                </button>
+            </div>
+
+            <!-- Error Message -->
+            <div id="attractions-error" class="error-message" style="display: none;">
+                Failed to load attractions. Please try again later.
+            </div>
+        </div>
+    </section>
+
+    <!-- Hotels Section -->
+    <section id="hotels">
+        <div class="container">
+            <div class="section-header">
+                <h2>🏨 Top Accommodation Picks</h2>
+                <p>Find the best hotels and guesthouses for your stay across Pakistan</p>
+            </div>
+
+            <!-- Hotel Tabs -->
+            <div class="tabs">
+                <div class="tab active" data-tab="all-hotels" onclick="showAllHotels()">All Hotels</div>
+                <div class="tab" data-tab="luxury-hotels" onclick="filterHotelsByCategory('luxury')">Luxury</div>
+                <div class="tab" data-tab="budget-hotels" onclick="filterHotelsByCategory('budget')">Budget</div>
+                <div class="tab" data-tab="resort-hotels" onclick="filterHotelsByCategory('resort')">Resorts</div>
+            </div>
+
+            <div id="hotels-loading" class="spinner" style="display: none;"></div>
+
+            <div id="hotels-container" class="cards-grid">
+                <!-- Hotels will be loaded here by JavaScript -->
+            </div>
+
+            <div id="hotels-error" class="error-message" style="display: none;">
+                Failed to load hotels. Please try again later.
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Package Generator -->
+    <section id="custom">
+        <div class="container">
+            <div class="section-header">
+                <h2>Create Your Custom Travel Plan</h2>
+                <p>Tell us your preferences and we'll create a personalized itinerary</p>
+            </div>
+
+            <div class="package-generator">
+                <form class="preferences-form" id="custom-package-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="region">Preferred Region</label>
+                            <select id="region" class="form-control" required>
+                                <option value="">Select a region</option>
+                                <!-- Regions will be loaded dynamically -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Travel Category</label>
+                            <select id="category" class="form-control" required>
+                                <option value="">Select category</option>
+                                <!-- Categories will be loaded dynamically -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="duration">Trip Duration (Days)</label>
+                            <select id="duration" class="form-control" required>
+                                <option value="">Select duration</option>
+                                <!-- Durations will be loaded dynamically -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget" class="form-control" required>
+                                <option value="">Select budget</option>
+                                <!-- Budget ranges will be loaded dynamically -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="group">Travel Group</label>
+                            <select id="group" class="form-control" required>
+                                <option value="">Select group type</option>
+                                <option value="solo">Solo Traveler</option>
+                                <option value="couple">Couple</option>
+                                <option value="family">Family</option>
+                                <option value="friends">Friends</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="season">Preferred Season</label>
+                            <select id="season" class="form-control" required>
+                                <option value="">Select season</option>
+                                <option value="spring">Spring (Mar-May)</option>
+                                <option value="summer">Summer (Jun-Aug)</option>
+                                <option value="autumn">Autumn (Sep-Nov)</option>
+                                <option value="winter">Winter (Dec-Feb)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interests">Specific Interests (Optional)</label>
+                        <input type="text" id="interests" class="form-control" placeholder="e.g., hiking, photography, local cuisine">
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="btn btn-primary" style="padding: 12px 30px; font-size: 1.1rem;" id="generate-btn">
+                            <i class="fas fa-magic"></i> Generate Custom Package
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Custom Package Result -->
+            <div class="package-details" id="custom-package-result" style="display: none;">
+                <!-- This will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Pakistan Travel Planner</h3>
+                    <p>Your trusted partner for discovering the beauty and diversity of Pakistan through customized travel experiences.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#packages">Travel Packages</a></li>
+                        <li><a href="#attractions">Top Attractions</a></li>
+                        <li><a href="#hotels">Hotels</a></li>
+                        <li><a href="#custom">Custom Plans</a></li>
+                        <li><a href="#">Travel Guides</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Popular Regions</h3>
+                    <ul>
+                        <li><a href="#" onclick="filterPackages('northern')">Northern Areas</a></li>
+                        <li><a href="#" onclick="filterPackages('punjab')">Punjab</a></li>
+                        <li><a href="#" onclick="filterPackages('sindh')">Sindh</a></li>
+                        <li><a href="#" onclick="filterPackages('balochistan')">Balochistan</a></li>
+                        <li><a href="#" onclick="filterPackages('kpk')">Khyber Pakhtunkhwa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</li>
+                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                        <li><i class="fas fa-envelope"></i> info@pakistantravel.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Pakistan Travel Planner. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ============================================
+    // THE ONLY CHANGE - localhost -> 127.0.0.1
+    // ============================================
+    const API_BASE = 'http://127.0.0.1:5000/api';
+    
+    let currentUser = null;
+    let authToken = null;
+    let savedAttractions = [];
+    let savedPackages = [];
+    let allHotels = [];
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Initializing Pakistan Travel Planner...');
+
+        // Check if user is already logged in
+        checkAuthStatus();
+
+        loadMetadata();
+        loadPackages();
+        loadAttractions();
+        loadHotels();
+        loadSavedAttractions();
+        loadSavedPackages();
+        addSavedAttractionsStyles();
+        setupEventListeners();
+        updateAuthUI();
+    });
+
+    // --- HOTEL RENDERING FUNCTIONS ---
+
+    // Function to render a single hotel card
+    function renderHotelCard(hotel) {
+        const defaultImageUrl = 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+        const imageUrl = hotel.image_url || hotel.imageUrl || defaultImageUrl;
+        const priceRange = hotel.price_range || hotel.priceRange || `PKR ${(hotel.starting_price || 5000).toLocaleString()}+`;
+        const rating = hotel.rating || Math.random() * 2 + 3;
+        const reviewCount = hotel.review_count || hotel.reviews || Math.floor(Math.random() * 500) + 50;
+
+        const starRating = generateStarRating(rating);
+
+        return `
+            <div class="card hotel-card" onclick="showHotelDetail('${hotel._id || hotel.id || hotel.hotelName}', '${hotel.hotelName || hotel.name}')">
+                <img src="${imageUrl}" alt="${hotel.hotelName || hotel.name}" class="card-img" loading="lazy">
+                <div class="card-content">
+                    <h3>${hotel.hotelName || hotel.name}</h3>
+                    <div class="card-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> ${hotel.region || hotel.location || 'Unknown'}</span>
+                        <span class="hotel-rating">
+                            ${starRating}
+                            <span style="margin-left: 5px;">${rating.toFixed(1)} (${reviewCount})</span>
+                        </span>
+                    </div>
+                    <p>${(hotel.description || hotel.overview || '').substring(0, 100)}...</p>
+                    <div class="card-footer">
+                        <span class="price hotel-price">${priceRange}</span>
+                        <a href="#" class="btn-link" onclick="event.stopPropagation(); showHotelDetail('${hotel._id || hotel.id || hotel.hotelName}', '${hotel.hotelName || hotel.name}')">
+                            View Details <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function generateStarRating(rating) {
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+        let stars = '';
+        for (let i = 0; i < fullStars; i++) {
+            stars += '<i class="fas fa-star star-filled"></i>';
+        }
+        if (hasHalfStar) {
+            stars += '<i class="fas fa-star-half-alt star-filled"></i>';
+        }
+        for (let i = 0; i < emptyStars; i++) {
+            stars += '<i class="far fa-star star-empty"></i>';
+        }
+
+        return stars;
+    }
+
+    async function loadHotels() {
+        const container = document.getElementById('hotels-container');
+        const loading = document.getElementById('hotels-loading');
+        const errorDiv = document.getElementById('hotels-error');
+
+        if (!container) return;
+
+        container.innerHTML = '';
+        loading.style.display = 'block';
+        errorDiv.style.display = 'none';
+
+        try {
+            const response = await fetch(`${API_BASE}/hotels?limit=8`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success && data.hotels && data.hotels.length > 0) {
+                allHotels = data.hotels;
+                let htmlContent = '';
+                data.hotels.forEach(hotel => {
+                    htmlContent += renderHotelCard(hotel);
+                });
+                container.innerHTML = htmlContent;
+                showToast(`Loaded ${data.hotels.length} top hotels.`, 'success');
+            } else {
+                showDemoHotels();
+            }
+        } catch (error) {
+            console.error('Error fetching hotels:', error);
+            errorDiv.style.display = 'block';
+            errorDiv.innerHTML = `Failed to load hotels. Error: ${error.message}. Is the backend running?`;
+            showToast('API connection error for hotels. Showing demo hotels.', 'error');
+            showDemoHotels();
+        } finally {
+            loading.style.display = 'none';
+        }
+    }
+
+    function showDemoHotels() {
+        const container = document.getElementById('hotels-container');
+        if (!container) return;
+
+        const demoHotels = [
+            {
+                id: 'serena-islamabad',
+                name: 'Serena Hotel Islamabad',
+                description: '5-star luxury hotel in the heart of Islamabad with world-class amenities and services.',
+                region: 'Islamabad',
+                rating: 4.8,
+                review_count: 1245,
+                price_range: 'PKR 25,000+',
+                image_url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                category: 'luxury'
+            },
+            {
+                id: 'pearl-continental',
+                name: 'Pearl Continental Lahore',
+                description: 'Iconic luxury hotel offering premium accommodation and excellent dining options.',
+                region: 'Lahore',
+                rating: 4.6,
+                review_count: 892,
+                price_range: 'PKR 20,000+',
+                image_url: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                category: 'luxury'
+            },
+            {
+                id: 'mountain-view-resort',
+                name: 'Mountain View Resort',
+                description: 'Beautiful resort in the mountains with stunning views and outdoor activities.',
+                region: 'Northern Areas',
+                rating: 4.4,
+                review_count: 567,
+                price_range: 'PKR 15,000+',
+                image_url: 'https://images.unsplash.com/photo-1564501049418-3c27787d01e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                category: 'resort'
+            },
+            {
+                id: 'heritage-hotel',
+                name: 'Heritage Hotel Karachi',
+                description: 'Historic hotel offering comfortable stays with traditional Pakistani hospitality.',
+                region: 'Karachi',
+                rating: 4.2,
+                review_count: 432,
+                price_range: 'PKR 10,000+',
+                image_url: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                category: 'budget'
+            },
+            {
+                id: 'lakeview-hotel',
+                name: 'Lake View Hotel',
+                description: 'Scenic hotel located by the lake, perfect for nature lovers and photographers.',
+                region: 'KPK',
+                rating: 4.3,
+                review_count: 321,
+                price_range: 'PKR 8,000+',
+                image_url: 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                category: 'budget'
+            },
+            {
+                id: 'desert-resort',
+                name: 'Desert Resort & Spa',
+                description: 'Unique desert resort offering luxury tents and authentic desert experiences.',
+                region: 'Balochistan',
+                rating: 4.5,
+                review_count: 234,
+                price_range: 'PKR 18,000+',
+                image_url: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                category: 'resort'
+            },
+            {
+                id: 'business-hotel',
+                name: 'Business Class Hotel',
+                description: 'Modern hotel designed for business travelers with conference facilities and high-speed internet.',
+                region: 'Islamabad',
+                rating: 4.1,
+                review_count: 189,
+                price_range: 'PKR 12,000+',
+                image_url: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                category: 'luxury'
+            },
+            {
+                id: 'family-inn',
+                name: 'Family Inn Guesthouse',
+                description: 'Cozy family-run guesthouse with home-like atmosphere and homemade meals.',
+                region: 'Northern Areas',
+                rating: 4.7,
+                review_count: 456,
+                price_range: 'PKR 6,000+',
+                image_url: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                category: 'budget'
+            }
+        ];
+
+        allHotels = demoHotels;
+        let htmlContent = '';
+        demoHotels.forEach(hotel => {
+            htmlContent += renderHotelCard(hotel);
+        });
+        container.innerHTML = htmlContent;
+    }
+
+    function filterHotelsByCategory(category) {
+        const container = document.getElementById('hotels-container');
+        if (!container) return;
+
+        document.querySelectorAll('.tabs .tab').forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.getAttribute('data-tab') === category + '-hotels') {
+                tab.classList.add('active');
+            }
+        });
+
+        if (category === 'all-hotels') {
+            let htmlContent = '';
+            allHotels.forEach(hotel => {
+                htmlContent += renderHotelCard(hotel);
+            });
+            container.innerHTML = htmlContent;
+            return;
+        }
+
+        const filteredHotels = allHotels.filter(hotel =>
+            hotel.category === category ||
+            (category === 'luxury' && hotel.price_range && hotel.price_range.includes('20,000')) ||
+            (category === 'budget' && hotel.price_range && hotel.price_range.includes('6,000') || hotel.price_range.includes('8,000'))
+        );
+
+        if (filteredHotels.length === 0) {
+            container.innerHTML = '<p class="info-message">No hotels found in this category. Showing all hotels instead.</p>';
+            setTimeout(() => {
+                filterHotelsByCategory('all-hotels');
+            }, 2000);
+            return;
+        }
+
+        let htmlContent = '';
+        filteredHotels.forEach(hotel => {
+            htmlContent += renderHotelCard(hotel);
+        });
+        container.innerHTML = htmlContent;
+    }
+
+    function showAllHotels() {
+        filterHotelsByCategory('all-hotels');
+    }
+
+    function showHotelDetail(hotelId, hotelName) {
+        const hotel = allHotels.find(h =>
+            h.id === hotelId || h._id === hotelId || h.hotelName === hotelName || h.name === hotelName
+        ) || allHotels[0];
+
+        const modal = document.createElement('div');
+        modal.className = 'hotel-modal-overlay';
+        modal.id = 'hotel-modal';
+
+        modal.innerHTML = `
+            <div class="hotel-modal">
+                <button onclick="closeHotelModal()" class="hotel-modal-close">×</button>
+
+                <div class="hotel-modal-header">
+                    <img src="${hotel.image_url || hotel.imageUrl || 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}"
+                         alt="${hotel.hotelName || hotel.name}">
+                    <div class="hotel-modal-header-content">
+                        <h1 style="margin: 0; font-size: 2.2rem; font-weight: 800;">${hotel.hotelName || hotel.name}</h1>
+                        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                            <span style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;">
+                                <i class="fas fa-map-marker-alt"></i> ${hotel.region || hotel.location || 'Unknown'}
+                            </span>
+                            <span style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;">
+                                ${generateStarRating(hotel.rating || 4.0)}
+                                <span style="margin-left: 5px;">${(hotel.rating || 4.0).toFixed(1)}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hotel-modal-body">
+                    <div style="margin-bottom: 25px;">
+                        <h2 style="color: var(--dark); border-bottom: 3px solid var(--hotel-color);
+                                   padding-bottom: 10px; margin-bottom: 15px; font-size: 1.3rem;">
+                            <i class="fas fa-info-circle"></i> About ${hotel.hotelName || hotel.name}
+                        </h2>
+                        <p style="line-height: 1.7; font-size: 1.05rem; color: #444;">
+                            ${hotel.description || hotel.overview || 'A comfortable and welcoming accommodation option.'}
+                        </p>
+                    </div>
+
+                    <div class="hotel-details-grid">
+                        <div class="hotel-detail-card">
+                            <div style="font-size: 2rem; color: var(--hotel-color); margin-bottom: 10px;">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div style="font-weight: 600; color: var(--dark); margin-bottom: 5px;">Price Range</div>
+                            <div style="color: #666;">${hotel.price_range || hotel.priceRange || 'PKR 10,000+'}</div>
+                        </div>
+
+                        <div class="hotel-detail-card">
+                            <div style="font-size: 2rem; color: var(--hotel-color); margin-bottom: 10px;">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div style="font-weight: 600; color: var(--dark); margin-bottom: 5px;">Hotel Type</div>
+                            <div style="color: #666;">${hotel.category ? hotel.category.charAt(0).toUpperCase() + hotel.category.slice(1) : 'Standard'}</div>
+                        </div>
+
+                        <div class="hotel-detail-card">
+                            <div style="font-size: 2rem; color: var(--hotel-color); margin-bottom: 10px;">
+                                <i class="fas fa-thumbs-up"></i>
+                            </div>
+                            <div style="font-weight: 600; color: var(--dark); margin-bottom: 5px;">Rating</div>
+                            <div style="color: #666;">${(hotel.rating || 4.0).toFixed(1)}/5 (${hotel.review_count || hotel.reviews || 100}+ reviews)</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                            <i class="fas fa-concierge-bell"></i> Amenities
+                        </h3>
+                        <div class="hotel-amenities">
+                            ${['WiFi', 'Air Conditioning', 'Restaurant', 'Swimming Pool', 'Spa', 'Parking', 'Room Service', 'Gym']
+                                .map(amenity => `
+                                <span class="amenity-tag">
+                                    <i class="fas fa-check"></i> ${amenity}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="room-options">
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                            <i class="fas fa-bed"></i> Room Options
+                        </h3>
+                        <div class="room-option">
+                            <div>
+                                <div style="font-weight: 600; color: var(--dark);">Standard Room</div>
+                                <div style="color: #666; font-size: 0.9rem; margin-top: 4px;">1 King Bed, Basic Amenities</div>
+                            </div>
+                            <div class="room-price">PKR ${(parseInt(hotel.price_range?.replace(/\D/g, '') || 10000) * 0.8).toLocaleString()}</div>
+                        </div>
+                        <div class="room-option">
+                            <div>
+                                <div style="font-weight: 600; color: var(--dark);">Deluxe Room</div>
+                                <div style="color: #666; font-size: 0.9rem; margin-top: 4px;">2 Queen Beds, Premium Amenities</div>
+                            </div>
+                            <div class="room-price">PKR ${(parseInt(hotel.price_range?.replace(/\D/g, '') || 10000) * 1.2).toLocaleString()}</div>
+                        </div>
+                        <div class="room-option">
+                            <div>
+                                <div style="font-weight: 600; color: var(--dark);">Suite</div>
+                                <div style="color: #666; font-size: 0.9rem; margin-top: 4px;">Living Room + Bedroom, All Amenities</div>
+                            </div>
+                            <div class="room-price">PKR ${(parseInt(hotel.price_range?.replace(/\D/g, '') || 10000) * 1.5).toLocaleString()}</div>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border); padding-top: 25px; text-align: center;">
+                        <button class="btn btn-hotel" style="padding: 12px 30px; font-size: 1.1rem;"
+                                onclick="bookHotel('${hotelId}', '${hotelName}')">
+                            <i class="fas fa-calendar-check"></i> Book Now
+                        </button>
+                        <button class="btn btn-outline" style="padding: 12px 30px; font-size: 1.1rem; margin-left: 15px;"
+                                onclick="closeHotelModal()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) closeHotelModal();
+        });
+    }
+
+    function closeHotelModal() {
+        const modal = document.getElementById('hotel-modal');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    function bookHotel(hotelId, hotelName) {
+        showToast(`Booking ${hotelName}... Redirecting to booking page.`, 'success');
+        setTimeout(() => {
+            closeHotelModal();
+        }, 2000);
+    }
+
+    // ========== AUTHENTICATION FUNCTIONS ==========
+
+    function checkAuthStatus() {
+        const token = localStorage.getItem('authToken');
+        const user = localStorage.getItem('currentUser');
+
+        if (token && user) {
+            authToken = token;
+            currentUser = JSON.parse(user);
+            console.log('✅ User already logged in:', currentUser.name);
+        }
+    }
+
+    function updateAuthUI() {
+        const authButtons = document.getElementById('auth-buttons');
+
+        if (authButtons) {
+            if (currentUser) {
+                authButtons.innerHTML = `
+                    <div class="user-info">
+                        <span class="user-name">Welcome, ${currentUser.name}</span>
+                        <a href="#" class="btn btn-outline" onclick="logout()">Logout</a>
+                    </div>
+                `;
+            } else {
+                authButtons.innerHTML = `
+                    <a href="#" class="btn btn-outline" onclick="showLoginModal()">Login</a>
+                    <a href="#" class="btn btn-primary" onclick="showRegisterModal()">Sign Up</a>
+                `;
+            }
+        }
+
+        updateSaveButtons();
+    }
+
+    function updateSaveButtons() {
+        const saveButtons = document.querySelectorAll('button[onclick*="save"]');
+        saveButtons.forEach(button => {
+            if (!currentUser) {
+                button.disabled = true;
+                button.title = 'Please login to save';
+                button.style.opacity = '0.6';
+                button.style.cursor = 'not-allowed';
+
+                const originalOnclick = button.getAttribute('onclick');
+                button.setAttribute('data-original-onclick', originalOnclick);
+                button.setAttribute('onclick', 'showLoginModal()');
+            } else {
+                const originalOnclick = button.getAttribute('data-original-onclick');
+                if (originalOnclick) {
+                    button.setAttribute('onclick', originalOnclick);
+                    button.removeAttribute('data-original-onclick');
+                    button.disabled = false;
+                    button.title = '';
+                    button.style.opacity = '1';
+                    button.style.cursor = 'pointer';
+                }
+            }
+        });
+    }
+
+    function showLoginModal() {
+        createAuthModal('login');
+    }
+
+    function showRegisterModal() {
+        createAuthModal('register');
+    }
+
+    function createAuthModal(type) {
+        const isLogin = type === 'login';
+
+        const existingModal = document.getElementById('auth-modal');
+        if (existingModal) existingModal.remove();
+
+        const modal = document.createElement('div');
+        modal.id = 'auth-modal';
+        modal.className = 'auth-modal-overlay';
+
+        modal.innerHTML = `
+            <div class="auth-modal">
+                <button onclick="closeAuthModal()" class="auth-modal-close">×</button>
+
+                <div class="auth-modal-header">
+                    <h2>
+                        <i class="fas fa-${isLogin ? 'sign-in-alt' : 'user-plus'}"></i>
+                        ${isLogin ? 'Login to Your Account' : 'Create New Account'}
+                    </h2>
+                </div>
+
+                <div class="auth-modal-body">
+                    <form id="auth-form" onsubmit="return handleAuth(event, '${type}')">
+                        ${!isLogin ? `
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" class="form-control" required
+                                       placeholder="Enter your full name">
+                            </div>
+                        ` : ''}
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required
+                                   placeholder="Enter your email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" required
+                                   placeholder="Enter your password" minlength="6">
+                        </div>
+
+                        ${!isLogin ? `
+                            <div class="form-group">
+                                <label for="preferences">Travel Preferences (Optional)</label>
+                                <input type="text" id="preferences" class="form-control"
+                                       placeholder="e.g., hiking, photography, cultural">
+                            </div>
+                        ` : ''}
+
+                        <div style="margin: 20px 0;">
+                            <button type="submit" class="btn btn-primary"
+                                    style="width: 100%; padding: 12px; font-size: 1.1rem;"
+                                    id="auth-submit-btn">
+                                <i class="fas fa-${isLogin ? 'sign-in-alt' : 'user-plus'}"></i>
+                                ${isLogin ? 'Login' : 'Sign Up'}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="auth-modal-footer">
+                    ${isLogin ? "Don't have an account?" : "Already have an account?"}
+                    <a href="#" onclick="${isLogin ? 'showRegisterModal()' : 'showLoginModal()'}"
+                       style="color: var(--primary); text-decoration: none; font-weight: 500; margin-left: 5px;">
+                        ${isLogin ? 'Sign up here' : 'Login here'}
+                    </a>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) closeAuthModal();
+        });
+    }
+
+    function closeAuthModal() {
+        const modal = document.getElementById('auth-modal');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    async function handleAuth(event, type) {
+        event.preventDefault();
+
+        const isLogin = type === 'login';
+        const submitBtn = document.getElementById('auth-submit-btn');
+        const originalText = submitBtn.innerHTML;
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+        try {
+            const formData = {
+                email: document.getElementById('email').value.trim(),
+                password: document.getElementById('password').value.trim()
+            };
+
+            if (!isLogin) {
+                formData.name = document.getElementById('name').value.trim();
+                const preferences = document.getElementById('preferences').value.trim();
+                if (preferences) {
+                    formData.preferences = {
+                        interests: preferences.split(',').map(p => p.trim())
+                    };
+                }
+            }
+
+            if (!formData.email || !formData.password) {
+                throw new Error('Please fill in all required fields');
+            }
+
+            if (!isLogin && !formData.name) {
+                throw new Error('Name is required');
+            }
+
+            const endpoint = isLogin ? '/users/login' : '/users/register';
+            const response = await fetch(`${API_BASE}${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                if (data.token && data.user) {
+                    authToken = data.token;
+                    currentUser = data.user;
+
+                    localStorage.setItem('authToken', authToken);
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+                    updateAuthUI();
+                    closeAuthModal();
+
+                    showToast(`${isLogin ? 'Login' : 'Registration'} successful! Welcome ${currentUser.name}`, 'success');
+                    loadUserData();
+                } else {
+                    throw new Error('Authentication failed - no token received');
+                }
+            } else {
+                throw new Error(data.error || data.message || `Authentication failed: ${response.status}`);
+            }
+
+        } catch (error) {
+            console.error(`❌ ${type} error:`, error);
+            showToast(error.message, 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    }
+
+    function showToast(message, type = 'error') {
+        const existingToast = document.getElementById('toast-message');
+        if (existingToast) existingToast.remove();
+
+        const toast = document.createElement('div');
+        toast.id = 'toast-message';
+        toast.className = 'toast-message';
+
+        toast.innerHTML = `
+            <div class="toast-content toast-${type}">
+                <i class="fas fa-${type === 'error' ? 'exclamation-triangle' : type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                <div style="flex: 1;">${message}</div>
+                <button onclick="this.parentElement.parentElement.remove()"
+                        style="background: transparent; border: none; color: inherit; cursor: pointer; padding: 0; margin: 0;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            if (toast.parentElement) {
+                toast.remove();
+            }
+        }, 5000);
+    }
+
+    function loadUserData() {
+        if (currentUser) {
+            console.log('📊 Loading user data...');
+            loadSavedPackagesFromAPI();
+            updateSavedCount();
+
+            if (currentUser.preferences && currentUser.preferences.interests) {
+                const interestsInput = document.getElementById('interests');
+                if (interestsInput) {
+                    interestsInput.value = currentUser.preferences.interests.join(', ');
+                }
+            }
+        }
+    }
+
+    async function loadSavedPackagesFromAPI() {
+        if (!authToken) return;
+
+        try {
+            const response = await fetch(`${API_BASE}/users/saved-packages`, {
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success) {
+                    console.log('Loaded saved packages from API:', data.packages);
+                }
+            }
+        } catch (error) {
+            console.error('Error loading saved packages:', error);
+        }
+    }
+
+    async function savePackageToUser(packageId) {
+        if (!authToken) {
+            showLoginModal();
+            return false;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE}/users/saved-packages`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ package_id: packageId })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showToast('Package saved to your account!', 'success');
+                return true;
+            } else {
+                throw new Error(data.error || 'Failed to save package');
+            }
+        } catch (error) {
+            console.error('Error saving package:', error);
+            showToast(error.message, 'error');
+            return false;
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('currentUser');
+        authToken = null;
+        currentUser = null;
+
+        updateAuthUI();
+        showToast('Logged out successfully', 'info');
+
+        savedAttractions = [];
+        savedPackages = [];
+        updateSavedCount();
+        updateSavedPackagesCount();
+        showAllAttractions();
+    }
+
+    function saveToWishlist(attractionName, attractionId) {
+        if (!currentUser) {
+            showLoginModal();
+            return;
+        }
+
+        console.log('Saving attraction:', attractionName, attractionId);
+
+        const isAlreadySaved = savedAttractions.some(item => item.id === attractionId);
+
+        if (isAlreadySaved) {
+            savedAttractions = savedAttractions.filter(item => item.id !== attractionId);
+            showToast(`Removed "${attractionName}" from saved attractions`, 'info');
+        } else {
+            let imageUrl = '';
+            const modalImg = document.querySelector('#explore-modal img');
+            if (modalImg) {
+                imageUrl = modalImg.src;
+            } else {
+                imageUrl = getDefaultImage(attractionId);
+            }
+
+            savedAttractions.push({
+                id: attractionId,
+                name: attractionName,
+                image: imageUrl,
+                dateAdded: new Date().toISOString(),
+                type: 'attraction'
+            });
+            showToast(`Saved "${attractionName}" to your attractions!`, 'success');
+        }
+
+        localStorage.setItem('pakistanTravelSavedAttractions', JSON.stringify(savedAttractions));
+        updateSavedCount();
+
+        if (document.querySelector('#saved-attractions-tab.active')) {
+            displaySavedAttractions();
+        }
+
+        updateSaveButtonInModal(attractionId, !isAlreadySaved);
+    }
+
+    function savePackageToWishlist(packageName, packageId) {
+        if (!currentUser) {
+            showLoginModal();
+            return;
+        }
+
+        savePackageToUser(packageId);
+        console.log('Saving package:', packageName, packageId);
+
+        const isAlreadySaved = savedPackages.some(item => item.id === packageId);
+
+        if (isAlreadySaved) {
+            savedPackages = savedPackages.filter(item => item.id !== packageId);
+            showToast(`Removed "${packageName}" from saved packages`, 'info');
+        } else {
+            let imageUrl = '';
+            const modalImg = document.querySelector('#package-modal img');
+            if (modalImg) {
+                imageUrl = modalImg.src;
+            } else {
+                imageUrl = 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+            }
+
+            savedPackages.push({
+                id: packageId,
+                name: packageName,
+                image: imageUrl,
+                dateAdded: new Date().toISOString(),
+                type: 'package'
+            });
+            showToast(`Saved "${packageName}" to your packages!`, 'success');
+        }
+
+        localStorage.setItem('pakistanTravelSavedPackages', JSON.stringify(savedPackages));
+        updateSavedPackagesCount();
+        updateSavePackageButtonInModal(packageId, !isAlreadySaved);
+    }
+
+    // ========== APPLICATION FUNCTIONS ==========
+
+    async function loadMetadata() {
+        try {
+            console.log('📡 Loading metadata...');
+
+            const regionsRes = await fetch(`${API_BASE}/metadata/regions`);
+            const regions = await regionsRes.json();
+
+            const categoriesRes = await fetch(`${API_BASE}/metadata/categories`);
+            const categories = await categoriesRes.json();
+
+            const regionSelect = document.getElementById('region');
+            regions.forEach(region => {
+                const option = document.createElement('option');
+                option.value = region.id;
+                option.textContent = region.name;
+                regionSelect.appendChild(option);
+            });
+
+            const categorySelect = document.getElementById('category');
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+
+            const budgetSelect = document.getElementById('budget');
+            const durationSelect = document.getElementById('duration');
+
+            const budgets = [
+                {id: 'low', name: 'Low (Under PKR 20,000)'},
+                {id: 'medium', name: 'Medium (PKR 20,000 - 50,000)'},
+                {id: 'high', name: 'High (PKR 50,000+)'}
+            ];
+
+            budgets.forEach(budget => {
+                const option = document.createElement('option');
+                option.value = budget.id;
+                option.textContent = budget.name;
+                budgetSelect.appendChild(option);
+            });
+
+            const durations = [
+                {id: '3', name: '3 Days'},
+                {id: '5', name: '5 Days'},
+                {id: '7', name: '7 Days'},
+                {id: '10', name: '10 Days'}
+            ];
+
+            durations.forEach(duration => {
+                const option = document.createElement('option');
+                option.value = duration.id;
+                option.textContent = duration.name;
+                durationSelect.appendChild(option);
+            });
+
+            console.log('✅ Metadata loaded successfully');
+
+        } catch (error) {
+            console.error('❌ Error loading metadata:', error);
+            showToast('Failed to load page data. Please refresh the page.', 'error');
+        }
+    }
+
+    async function loadPackages(region = null) {
+        showLoading('packages');
+
+        try {
+            console.log('📦 Loading packages...');
+            let url = `${API_BASE}/packages`;
+            if (region && region !== 'all') {
+                url += `?region=${region}`;
+            }
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.success) {
+                console.log(`✅ Loaded ${data.packages.length} packages`);
+                displayPackages(data.packages);
+            } else {
+                showError('packages');
+            }
+        } catch (error) {
+            console.error('❌ Error loading packages:', error);
+            showError('packages');
+            displayFallbackPackages(region);
+        } finally {
+            hideLoading('packages');
+        }
+    }
+
+    function displayPackages(packages) {
+        const container = document.getElementById('packages-container');
+
+        if (!packages || packages.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; color: var(--gray); padding: 2rem;">
+                    <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <p>No packages found for this region.</p>
+                    <p>Try selecting a different region or check back later.</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = `
+            <div class="cards-grid">
+                ${packages.map(pkg => `
+                    <div class="card">
+                        <img src="${pkg.image_url || 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80'}"
+                             alt="${pkg.name}" class="card-img">
+                        <div class="card-content">
+                            <h3>${pkg.name}</h3>
+                            <p>${pkg.description || 'Explore beautiful destinations with our curated package.'}</p>
+                            <div class="card-meta">
+                                <span><i class="far fa-clock"></i> ${pkg.duration_days || 5} Days</span>
+                                <span><i class="fas fa-map-marker-alt"></i> ${pkg.region || 'Pakistan'}</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="price">PKR ${(pkg.price || 25000).toLocaleString()}</div>
+                                <button class="btn btn-primary" onclick="showPackageDetails('${pkg._id || pkg.name}')">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    function displayFallbackPackages(region) {
+        const fallbackPackages = [
+            {
+                _id: 'northern-adventure',
+                name: 'Northern Areas Adventure',
+                description: 'Explore the majestic mountains and valleys of Northern Pakistan',
+                duration_days: 7,
+                region: 'northern',
+                price: 45000
+            },
+            {
+                _id: 'punjab-cultural',
+                name: 'Punjab Cultural Tour',
+                description: 'Immerse yourself in the rich cultural heritage of Punjab',
+                duration_days: 5,
+                region: 'punjab',
+                price: 25000
+            },
+            {
+                _id: 'sindh-historical',
+                name: 'Sindh Historical Journey',
+                description: 'Discover ancient civilizations and historical sites',
+                duration_days: 4,
+                region: 'sindh',
+                price: 20000
+            }
+        ];
+
+        const filteredPackages = region && region !== 'all'
+            ? fallbackPackages.filter(p => p.region === region)
+            : fallbackPackages;
+
+        displayPackages(filteredPackages);
+    }
+
+    async function loadAttractions(limit = 6) {
+        showLoading('attractions');
+
+        try {
+            console.log('🏔️ Loading attractions...');
+            const response = await fetch(`${API_BASE}/attractions?limit=${limit}`);
+            const data = await response.json();
+
+            if (data.success) {
+                console.log(`✅ Loaded ${data.attractions.length} attractions`);
+                displayAllAttractions(data.attractions);
+            } else {
+                showError('attractions');
+            }
+        } catch (error) {
+            console.error('❌ Error loading attractions:', error);
+            showError('attractions');
+            displayFallbackAttractions();
+        } finally {
+            hideLoading('attractions');
+        }
+    }
+
+    function displayAllAttractions(attractions) {
+        const container = document.getElementById('attractions-container');
+
+        if (!container) {
+            console.error('❌ attractions-container not found!');
+            return;
+        }
+
+        if (!attractions || attractions.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: var(--gray);">
+                    <i class="fas fa-mountain" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <p>No attractions found at the moment.</p>
+                    <p>Please check back later.</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = attractions.map(attraction => `
+            <div class="card">
+                <img src="${attraction.image_url || 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}"
+                     alt="${attraction.name}" class="card-img">
+                <div class="card-content">
+                    <h3>${attraction.name}</h3>
+                    <p>${attraction.description || 'A beautiful destination in Pakistan worth visiting.'}</p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> ${attraction.region || 'Pakistan'}</span>
+                        <span><i class="fas fa-${getCategoryIcon(attraction.category)}"></i> ${attraction.category || 'Sightseeing'}</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Best Time: ${getBestSeason(attraction.best_season)}</span>
+                        <button class="btn btn-primary" onclick="showAttractionDetails('${attraction._id || attraction.id}')">
+                            Explore
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function displayFallbackAttractions() {
+        const fallbackAttractions = [
+            {
+                id: 'fairy-meadows',
+                _id: 'fairy-meadows',
+                name: 'Fairy Meadows',
+                description: 'Beautiful grassland with stunning views of Nanga Parbat',
+                region: 'northern',
+                category: 'hiking',
+                best_season: ['spring', 'summer'],
+                image_url: 'https://images.unsplash.com/photo-1594736797933-d0f289d3d0e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'badshahi-mosque',
+                _id: 'badshahi-mosque',
+                name: 'Badshahi Mosque',
+                description: 'One of the largest mosques in the world',
+                region: 'punjab',
+                category: 'historical',
+                best_season: ['winter', 'spring'],
+                image_url: 'https://images.unsplash.com/photo-1587130781383-5a70a8c9e4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'mohenjo-daro',
+                _id: 'mohenjo-daro',
+                name: 'Mohenjo-daro',
+                description: 'Archaeological site of ancient Indus Valley Civilization',
+                region: 'sindh',
+                category: 'historical',
+                best_season: ['winter'],
+                image_url: 'https://images.unsplash.com/photo-1484557985045-edf25e08da73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'kumrat-valley',
+                _id: 'kumrat-valley',
+                name: 'Kumrat Valley',
+                description: 'Beautiful valley with lush green meadows and forests',
+                region: 'kpk',
+                category: 'hiking',
+                best_season: ['spring', 'summer'],
+                image_url: 'https://images.unsplash.com/photo-1565955889011-41b8e22b3449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'attabad-lake',
+                _id: 'attabad-lake',
+                name: 'Attabad Lake',
+                description: 'Turquoise lake formed after 2010 landslide, famous for boat rides',
+                region: 'northern',
+                category: 'sightseeing',
+                best_season: ['spring', 'summer', 'autumn'],
+                image_url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'swat-valley',
+                _id: 'swat-valley',
+                name: 'Swat Valley',
+                description: 'Known as the Switzerland of Pakistan with beautiful landscapes',
+                region: 'kpk',
+                category: 'sightseeing',
+                best_season: ['spring', 'summer'],
+                image_url: 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            }
+        ];
+
+        displayAllAttractions(fallbackAttractions);
+    }
+
+    async function generateCustomPackage(preferences) {
+        showLoading('custom');
+        const generateBtn = document.getElementById('generate-btn');
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+        try {
+            console.log('🎯 Generating custom package...', preferences);
+
+            const response = await fetch(`${API_BASE}/packages/custom`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ preferences })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                console.log('✅ Custom package generated successfully');
+                displayCustomPackage(data.package);
+                showToast('Custom package generated successfully!', 'success');
+            } else {
+                throw new Error(data.error || 'Failed to generate package');
+            }
+        } catch (error) {
+            console.error('❌ Error generating package:', error);
+            showToast('Failed to generate package. Showing demo package instead.', 'error');
+            displayDemoCustomPackage(preferences);
+        } finally {
+            hideLoading('custom');
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = '<i class="fas fa-magic"></i> Generate Custom Package';
+        }
+    }
+
+    function displayCustomPackage(pkg) {
+        const resultContainer = document.getElementById('custom-package-result');
+
+        resultContainer.innerHTML = `
+            <div class="package-header">
+                <div class="package-info">
+                    <h3>${pkg.name}</h3>
+                    <div class="package-meta">
+                        <span><i class="far fa-clock"></i> ${pkg.duration_days} Days</span>
+                        <span><i class="fas fa-map-marker-alt"></i> ${pkg.region}</span>
+                        <span><i class="fas fa-tag"></i> ${pkg.category}</span>
+                    </div>
+                </div>
+                <div class="package-price">PKR ${pkg.price.toLocaleString()}</div>
+            </div>
+
+            <div class="package-content">
+                <div class="package-main">
+                    <div class="attractions-list">
+                        <h4>Top Attractions</h4>
+                        ${(pkg.attractions && pkg.attractions.length > 0 ? pkg.attractions.map(attr => `
+                            <div class="list-item">
+                                <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                     alt="${attr.name}" class="item-img">
+                                <div class="item-content">
+                                    <h4>${attr.name}</h4>
+                                    <p>${attr.description || 'Beautiful destination worth visiting.'}</p>
+                                    <div class="card-meta">
+                                        <span><i class="far fa-clock"></i> ${attr.time_required || 3} hours</span>
+                                        <span><i class="fas fa-walking"></i> ${attr.activity_type || 'Sightseeing'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('') : '<p>No attractions data available</p>')}
+                    </div>
+
+                    <div class="activities-list">
+                        <h4>Daily Itinerary</h4>
+                        <ul>
+                            ${pkg.itinerary ? pkg.itinerary.map(day => `
+                                <li><strong>Day ${day.day}:</strong> ${day.title}</li>
+                            `).join('') : `
+                                <li><strong>Day 1:</strong> Arrival and orientation</li>
+                                <li><strong>Day 2:</strong> Explore main attractions</li>
+                                <li><strong>Day 3:</strong> Cultural experiences</li>
+                                <li><strong>Day 4:</strong> Adventure activities</li>
+                                <li><strong>Day 5:</strong> Local cuisine and departure</li>
+                            `}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="package-sidebar">
+                    <div class="hotels-list">
+                        <h4>Recommended Hotels</h4>
+                        ${(pkg.hotels && pkg.hotels.length > 0 ? pkg.hotels.map(hotel => `
+                            <div class="list-item">
+                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                     alt="${hotel.name}" class="item-img">
+                                <div class="item-content">
+                                    <h4>${hotel.name}</h4>
+                                    <p>${hotel.amenities ? hotel.amenities.join(', ') : 'Comfortable accommodation'}</p>
+                                    <div class="card-meta">
+                                        <span>PKR ${hotel.price_per_night ? hotel.price_per_night.toLocaleString() : '5,000'}/night</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('') : `
+                            <div class="list-item">
+                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                     alt="Comfort Hotel" class="item-img">
+                                <div class="item-content">
+                                    <h4>Comfort Hotel</h4>
+                                    <p>Well-rated accommodation in the area</p>
+                                    <div class="card-meta">
+                                        <span>PKR 8,000/night</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `)}
+                    </div>
+
+                    <div class="transportation-info">
+                        <h4>Transportation</h4>
+                        <p><i class="fas fa-car"></i> ${pkg.transportation ? pkg.transportation.vehicle : 'Comfortable vehicle'}</p>
+                        <p>${pkg.transportation ? pkg.transportation.suggestion : 'All transportation included'}</p>
+                    </div>
+
+                    <div class="food-suggestions">
+                        <h4>Local Cuisine to Try</h4>
+                        <ul>
+                            ${(pkg.food_suggestions && pkg.food_suggestions.length > 0 ? pkg.food_suggestions.map(food => `<li>${food}</li>`).join('') : `
+                                <li>Local traditional dishes</li>
+                                <li>Regional specialties</li>
+                                <li>Fresh local produce</li>
+                            `)}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn btn-primary" style="padding: 12px 30px; font-size: 1.1rem;" onclick="savePackage('${pkg._id || 'custom-package'}')">
+                    <i class="fas fa-save"></i> Save This Package
+                </button>
+                <button class="btn btn-outline" style="padding: 12px 30px; font-size: 1.1rem; margin-left: 1rem;" onclick="generateNewPackage()">
+                    <i class="fas fa-redo"></i> Create Another
+                </button>
+            </div>
+        `;
+
+        resultContainer.style.display = 'block';
+        resultContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function displayDemoCustomPackage(preferences) {
+        const demoPackage = {
+            name: `Custom ${preferences.category} ${preferences.region} Tour`,
+            duration_days: parseInt(preferences.duration),
+            region: preferences.region,
+            category: preferences.category,
+            price: calculateDemoPrice(preferences),
+            attractions: [
+                {
+                    name: 'Main Attraction',
+                    description: 'Beautiful destination in the region',
+                    time_required: 4,
+                    activity_type: 'sightseeing'
+                },
+                {
+                    name: 'Cultural Site',
+                    description: 'Important cultural and historical location',
+                    time_required: 3,
+                    activity_type: 'cultural'
+                }
+            ],
+            hotels: [
+                {
+                    name: 'Comfort Hotel',
+                    amenities: ['WiFi', 'Restaurant', 'Air Conditioning'],
+                    price_per_night: 8000
+                }
+            ],
+            transportation: {
+                vehicle: 'Comfortable SUV',
+                suggestion: 'All transportation included'
+            },
+            food_suggestions: ['Local Cuisine', 'Traditional Dishes', 'Regional Specialties']
+        };
+
+        displayCustomPackage(demoPackage);
+    }
+
+    function calculateDemoPrice(preferences) {
+        let basePrice = parseInt(preferences.duration) * 5000;
+        if (preferences.budget_range === 'low') basePrice *= 0.8;
+        if (preferences.budget_range === 'high') basePrice *= 1.5;
+        return Math.round(basePrice / 1000) * 1000;
+    }
+
+    function getCategoryIcon(category) {
+        const icons = {
+            'hiking': 'hiking',
+            'historical': 'monument',
+            'cultural': 'landmark',
+            'adventure': 'mountain',
+            'sightseeing': 'binoculars',
+            'fort': 'fort',
+            'museum': 'museum'
+        };
+        return icons[category] || 'map-marker-alt';
+    }
+
+    function getBestSeason(seasons) {
+        if (!seasons) return 'All year';
+        return Array.isArray(seasons) ? seasons.join(', ') : seasons;
+    }
+
+    function showLoading(section) {
+        const loadingElement = document.getElementById(`${section}-loading`);
+        if (loadingElement) loadingElement.style.display = 'block';
+
+        const errorElement = document.getElementById(`${section}-error`);
+        if (errorElement) errorElement.style.display = 'none';
+    }
+
+    function hideLoading(section) {
+        const loadingElement = document.getElementById(`${section}-loading`);
+        if (loadingElement) loadingElement.style.display = 'none';
+    }
+
+    function showError(section) {
+        const errorElement = document.getElementById(`${section}-error`);
+        if (errorElement) errorElement.style.display = 'block';
+    }
+
+    function setupEventListeners() {
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+
+                if (tabId !== 'all') {
+                    loadPackages(tabId);
+                } else {
+                    loadPackages();
+                }
+            });
+        });
+
+        document.getElementById('custom-package-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const preferences = {
+                region: document.getElementById('region').value,
+                category: document.getElementById('category').value,
+                duration: document.getElementById('duration').value,
+                budget_range: document.getElementById('budget').value,
+                group_type: document.getElementById('group').value,
+                season: document.getElementById('season').value,
+                interests: document.getElementById('interests').value
+            };
+
+            if (!preferences.region || !preferences.category || !preferences.duration || !preferences.budget_range) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            generateCustomPackage(preferences);
+        });
+
+        document.getElementById('global-search').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchAll();
+            }
+        });
+
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('change', function() {
+                if (this.value) {
+                    this.style.borderColor = 'var(--primary)';
+                }
+            });
+        });
+    }
+
+    function searchAll() {
+        const query = document.getElementById('global-search').value.trim();
+        if (query) {
+            showToast(`Searching for: "${query}". This feature will search across packages, attractions, and hotels.`, 'success');
+            filterContentBySearch(query);
+        } else {
+            showToast('Please enter a search term', 'error');
+        }
+    }
+
+    function filterContentBySearch(query) {
+        const lowerQuery = query.toLowerCase();
+
+        const packageCards = document.querySelectorAll('#packages-container .card');
+        packageCards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(lowerQuery) ? 'block' : 'none';
+        });
+
+        const attractionCards = document.querySelectorAll('#attractions-container .card');
+        attractionCards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(lowerQuery) ? 'block' : 'none';
+        });
+
+        const hotelCards = document.querySelectorAll('#hotels-container .card');
+        hotelCards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(lowerQuery) ? 'block' : 'none';
+        });
+    }
+
+    function filterPackages(region) {
+        document.querySelectorAll('.tab').forEach(tab => {
+            if (tab.getAttribute('data-tab') === region) {
+                tab.click();
+            }
+        });
+    }
+
+    async function showPackageDetails(packageId) {
+        console.log('🎯 View Details clicked for package ID:', packageId);
+        showLoadingForModal();
+
+        try {
+            const endpoints = [
+                `${API_BASE}/packages/${packageId}/full`,
+                `${API_BASE}/packages/${packageId}`,
+                `${API_BASE}/package/${packageId}`,
+                `${API_BASE}/packages/${packageId}/details`
+            ];
+
+            let packageData = null;
+
+            for (const endpoint of endpoints) {
+                try {
+                    console.log(`🔍 Trying package endpoint: ${endpoint}`);
+                    const response = await fetch(endpoint);
+
+                    if (response.ok) {
+                        const apiResponse = await response.json();
+                        console.log(`✅ Package data from ${endpoint}:`, apiResponse);
+
+                        if (apiResponse.package) {
+                            packageData = apiResponse.package;
+                        } else if (apiResponse.data) {
+                            packageData = apiResponse.data;
+                        } else if (apiResponse.success && apiResponse.result) {
+                            packageData = apiResponse.result;
+                        } else if (apiResponse.name || apiResponse._id) {
+                            packageData = apiResponse;
+                        }
+
+                        if (packageData) break;
+                    }
+                } catch (endpointError) {
+                    console.log(`❌ Package endpoint ${endpoint} failed:`, endpointError.message);
+                    continue;
+                }
+            }
+
+            if (!packageData) {
+                throw new Error('Could not fetch package data');
+            }
+
+            packageData.detailed_info = await getPackageDetailedInfo(packageData, packageId);
+            createPackageModal(packageData, packageId);
+
+        } catch (error) {
+            console.error('❌ Error fetching package details:', error);
+            const fallbackPackage = getFallbackPackageData(packageId);
+            createPackageModal(fallbackPackage, packageId);
+            showToast('Showing package information. Connect to backend for complete details.', 'info');
+        } finally {
+            hideLoadingForModal();
+        }
+    }
+
+    async function getPackageDetailedInfo(pkg, packageId) {
+        return {
+            activities: pkg.activities || [
+                { name: 'Sightseeing Tour', duration: '4 hours', type: 'sightseeing' },
+                { name: 'Cultural Experience', duration: '3 hours', type: 'cultural' },
+                { name: 'Local Food Tasting', duration: '2 hours', type: 'culinary' }
+            ],
+            inclusions: pkg.inclusions || ['Accommodation', 'Breakfast', 'Transport', 'Guide'],
+            best_for: pkg.best_for || ['All Travelers', 'Families', 'Adventure Enthusiasts'],
+            hotels: pkg.hotel_details || [],
+            attractions: pkg.attraction_details || []
+        };
+    }
+
+    function getFallbackPackageData(packageId) {
+        const packageMap = {
+            'northern-adventure': {
+                name: 'Northern Adventure Expedition',
+                description: 'Comprehensive adventure tour covering mountains and valleys',
+                region: 'northern',
+                duration_days: 7,
+                price: 45000,
+                category: 'adventure',
+                image_url: 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            },
+            'punjab-cultural': {
+                name: 'Punjab Cultural Tour',
+                description: 'Explore rich cultural heritage of Punjab',
+                region: 'punjab',
+                duration_days: 5,
+                price: 25000,
+                category: 'cultural',
+                image_url: 'https://images.unsplash.com/photo-1587130781383-5a70a8c9e4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            },
+            'sindh-historical': {
+                name: 'Sindh Historical Journey',
+                description: 'Discover ancient civilizations and historical sites',
+                region: 'sindh',
+                duration_days: 4,
+                price: 20000,
+                category: 'historical',
+                image_url: 'https://images.unsplash.com/photo-1484557985045-edf25e08da73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            }
+        };
+
+        return packageMap[packageId] || {
+            name: 'Travel Package',
+            description: 'Beautiful travel package with amazing experiences',
+            region: 'Pakistan',
+            duration_days: 5,
+            price: 30000,
+            category: 'tour',
+            image_url: 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+        };
+    }
+
+    async function showAttractionDetails(attractionId) {
+        console.log('🎯 Explore button clicked for attraction ID:', attractionId);
+        showLoadingForModal();
+
+        try {
+            const endpoints = [
+                `${API_BASE}/attractions/${attractionId}/full`,
+                `${API_BASE}/attractions/${attractionId}`,
+                `${API_BASE}/attraction/${attractionId}`,
+                `${API_BASE}/attractions/${attractionId}/details`
+            ];
+
+            let attractionData = null;
+
+            for (const endpoint of endpoints) {
+                try {
+                    console.log(`🔍 Trying endpoint: ${endpoint}`);
+                    const response = await fetch(endpoint);
+
+                    if (response.ok) {
+                        const apiResponse = await response.json();
+                        console.log(`✅ Success from ${endpoint}:`, apiResponse);
+
+                        if (apiResponse.attraction) {
+                            attractionData = apiResponse.attraction;
+                        } else if (apiResponse.data) {
+                            attractionData = apiResponse.data;
+                        } else if (apiResponse.success && apiResponse.result) {
+                            attractionData = apiResponse.result;
+                        } else if (apiResponse.name || apiResponse._id) {
+                            attractionData = apiResponse;
+                        }
+
+                        if (attractionData) {
+                            if (attractionData.detailed_info) {
+                                console.log('📊 Got detailed info from API');
+                                break;
+                            }
+
+                            if (attractionData._id && !attractionData.detailed_info) {
+                                const detailsResponse = await fetch(`${API_BASE}/attractions/${attractionData._id}/detailed`);
+                                if (detailsResponse.ok) {
+                                    const detailsData = await detailsResponse.json();
+                                    if (detailsData.detailed_info) {
+                                        attractionData.detailed_info = detailsData.detailed_info;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (endpointError) {
+                    console.log(`❌ Endpoint ${endpoint} failed:`, endpointError.message);
+                    continue;
+                }
+            }
+
+            if (!attractionData) {
+                throw new Error('Could not fetch attraction data from any endpoint');
+            }
+
+            if (!attractionData.detailed_info) {
+                console.log('📡 Fetching specific details based on attraction type...');
+                attractionData.detailed_info = await fetchAttractionSpecificDetails(attractionData);
+            }
+
+            createMongoDBModal(attractionData, attractionId);
+
+        } catch (error) {
+            console.error('❌ Error fetching attraction details:', error);
+            const fallbackData = await getUniqueFallbackData(attractionId);
+            createMongoDBModal(fallbackData, attractionId);
+            showToast('Showing information. Connect to backend for complete details.', 'info');
+        } finally {
+            hideLoadingForModal();
+        }
+    }
+
+    async function fetchAttractionSpecificDetails(attraction) {
+        const attractionDetailsMap = {
+            'fairy-meadows': {
+                opening_hours: 'Sunrise to Sunset',
+                difficulty_level: 'Moderate',
+                entrance_fee: 'PKR 500',
+                local_transport: 'Jeep ride required from Raikot Bridge',
+                activities: ['Trekking', 'Camping', 'Photography', 'Star Gazing'],
+                nearby_facilities: ['Basic Camps', 'Local Restaurants', 'Guide Services'],
+                things_to_carry: ['Warm Clothes', 'Trekking Shoes', 'Sleeping Bag', 'First Aid Kit'],
+                essential_tips: ['Acclimatize to altitude', 'Hire local guide', 'Check weather forecast'],
+                parking_available: true,
+                wheelchair_accessible: false,
+                family_friendly: true,
+                safety_rating: 4.2
+            },
+            'badshahi-mosque': {
+                opening_hours: '8:00 AM - 8:00 PM (Open for prayers)',
+                difficulty_level: 'Easy',
+                entrance_fee: 'PKR 500 for foreigners, Free for locals',
+                local_transport: 'Easy access by taxi, rickshaw, or metro bus',
+                activities: ['Photography', 'Historical Tour', 'Religious Visit', 'Cultural Experience'],
+                nearby_facilities: ['Shoe Storage', 'Guided Tours', 'Restrooms', 'Souvenir Shops'],
+                things_to_carry: ['Modest Clothing', 'Camera', 'Headscarf for women'],
+                essential_tips: ['Dress modestly', 'Remove shoes before entering', 'Visit during non-prayer times'],
+                parking_available: true,
+                wheelchair_accessible: true,
+                family_friendly: true,
+                safety_rating: 4.8
+            },
+            'mohenjo-daro': {
+                opening_hours: '9:00 AM - 5:00 PM (Closed Fridays)',
+                difficulty_level: 'Easy',
+                entrance_fee: 'PKR 300',
+                local_transport: 'Available from Larkana city, taxi recommended',
+                activities: ['Archaeological Tour', 'Photography', 'Historical Study', 'Museum Visit'],
+                nearby_facilities: ['Museum', 'Guide Services', 'Restrooms', 'Information Center'],
+                things_to_carry: ['Hat/Sunscreen', 'Water Bottle', 'Comfortable Shoes', 'Camera'],
+                essential_tips: ['Hire certified guide', 'Visit museum first', 'Carry water'],
+                parking_available: true,
+                wheelchair_accessible: true,
+                family_friendly: true,
+                safety_rating: 4.5
+            },
+            'swat-valley': {
+                opening_hours: '24/7 (Best during daylight)',
+                difficulty_level: 'Easy to Moderate',
+                entrance_fee: 'Free, specific sites may charge',
+                local_transport: 'Road accessible, local transport available',
+                activities: ['Sightseeing', 'Hiking', 'Fishing', 'Skiing (winter)', 'Cultural Tours'],
+                nearby_facilities: ['Hotels', 'Restaurants', 'Souvenir Shops', 'ATMs'],
+                things_to_carry: ['Seasonal Clothing', 'Hiking Gear', 'Camera', 'Cash'],
+                essential_tips: ['Check road conditions', 'Book accommodation in peak season', 'Try local cuisine'],
+                parking_available: true,
+                wheelchair_accessible: false,
+                family_friendly: true,
+                safety_rating: 4.3
+            },
+            'hunza-valley': {
+                opening_hours: 'All day',
+                difficulty_level: 'Easy',
+                entrance_fee: 'Free',
+                local_transport: 'Road accessible, shared jeeps available',
+                activities: ['Photography', 'Cultural Tours', 'Hiking', 'Local Food Tasting'],
+                nearby_facilities: ['Hotels', 'Restaurants', 'Local Markets', 'Fuel Stations'],
+                things_to_carry: ['Warm Clothes', 'Camera', 'Sunscreen', 'Comfortable Shoes'],
+                essential_tips: ['Acclimatize slowly', 'Respect local culture', 'Try apricot products'],
+                parking_available: true,
+                wheelchair_accessible: false,
+                family_friendly: true,
+                safety_rating: 4.7
+            }
+        };
+
+        const attractionName = attraction.name ? attraction.name.toLowerCase() : '';
+        const attractionId = attraction._id ? attraction._id.toLowerCase() : '';
+
+        for (const [key, details] of Object.entries(attractionDetailsMap)) {
+            if (attractionName.includes(key) || attractionId.includes(key)) {
+                console.log(`🎯 Found specific details for: ${key}`);
+                return details;
+            }
+        }
+
+        const category = attraction.category ? attraction.category.toLowerCase() : '';
+        if (category.includes('hiking') || category.includes('mountain')) {
+            return {
+                opening_hours: 'Sunrise to Sunset',
+                difficulty_level: 'Moderate to Difficult',
+                entrance_fee: 'Varies by location',
+                local_transport: '4x4 vehicles recommended',
+                activities: ['Trekking', 'Camping', 'Photography', 'Rock Climbing'],
+                nearby_facilities: ['Base Camps', 'Guide Services', 'Basic Supplies'],
+                things_to_carry: ['Trekking Gear', 'Warm Clothes', 'First Aid', 'Energy Food'],
+                essential_tips: ['Check weather', 'Hire local guide', 'Acclimatize properly'],
+                parking_available: true,
+                wheelchair_accessible: false,
+                family_friendly: false,
+                safety_rating: 3.8
+            };
+        } else if (category.includes('historical') || category.includes('fort')) {
+            return {
+                opening_hours: '9:00 AM - 5:00 PM',
+                difficulty_level: 'Easy to Moderate',
+                entrance_fee: 'PKR 200-500',
+                local_transport: 'Road accessible',
+                activities: ['Historical Tour', 'Photography', 'Cultural Study'],
+                nearby_facilities: ['Guided Tours', 'Souvenir Shops', 'Restrooms'],
+                things_to_carry: ['Comfortable Shoes', 'Camera', 'Water', 'Hat'],
+                essential_tips: ['Hire guide for history', 'Wear comfortable shoes', 'Carry water'],
+                parking_available: true,
+                wheelchair_accessible: true,
+                family_friendly: true,
+                safety_rating: 4.5
+            };
+        } else if (category.includes('lake') || category.includes('water')) {
+            return {
+                opening_hours: '8:00 AM - 6:00 PM',
+                difficulty_level: 'Easy',
+                entrance_fee: 'PKR 100-300',
+                local_transport: 'Boat rides available',
+                activities: ['Boating', 'Fishing', 'Photography', 'Picnicking'],
+                nearby_facilities: ['Boat Services', 'Food Stalls', 'Restrooms'],
+                things_to_carry: ['Sunscreen', 'Water', 'Camera', 'Picnic Mat'],
+                essential_tips: ['Check boat safety', 'Carry life jacket', 'Avoid monsoon season'],
+                parking_available: true,
+                wheelchair_accessible: true,
+                family_friendly: true,
+                safety_rating: 4.0
+            };
+        }
+
+        return {
+            opening_hours: '9:00 AM - 6:00 PM',
+            difficulty_level: 'Easy',
+            entrance_fee: 'Varies',
+            local_transport: 'Available by road',
+            activities: ['Sightseeing', 'Photography', 'Local Exploration'],
+            nearby_facilities: ['Basic Amenities', 'Local Guides'],
+            things_to_carry: ['Water Bottle', 'Camera', 'Comfortable Shoes'],
+            essential_tips: ['Check local conditions', 'Respect local customs'],
+            parking_available: true,
+            wheelchair_accessible: false,
+            family_friendly: true,
+            safety_rating: 4.0
+        };
+    }
+
+    async function getUniqueFallbackData(attractionId) {
+        const basicInfo = await getBasicAttractionInfo(attractionId);
+        const specificDetails = await fetchAttractionSpecificDetails(basicInfo);
+        return { ...basicInfo, detailed_info: specificDetails };
+    }
+
+    async function getBasicAttractionInfo(attractionId) {
+        const attractionsContainer = document.getElementById('attractions-container');
+        const attractionCards = attractionsContainer.querySelectorAll('.card');
+
+        for (const card of attractionCards) {
+            const buttons = card.querySelectorAll('button');
+            for (const button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(attractionId)) {
+                    const h3 = card.querySelector('h3');
+                    const img = card.querySelector('img');
+                    const description = card.querySelector('p');
+                    const metaSpans = card.querySelectorAll('.card-meta span');
+
+                    return {
+                        _id: attractionId,
+                        name: h3 ? h3.textContent : 'Attraction',
+                        description: description ? description.textContent : 'Explore this beautiful destination.',
+                        image_url: img ? img.src : getDefaultImage(attractionId),
+                        region: metaSpans[0] ? extractRegion(metaSpans[0].textContent) : 'Pakistan',
+                        category: metaSpans[1] ? extractCategory(metaSpans[1].textContent) : 'Sightseeing'
+                    };
+                }
+            }
+        }
+
+        return {
+            _id: attractionId,
+            name: attractionId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+            description: 'A must-visit destination in Pakistan with unique experiences.',
+            image_url: getDefaultImage(attractionId),
+            region: getRegionFromId(attractionId),
+            category: getCategoryFromId(attractionId)
+        };
+    }
+
+    function getDefaultImage(attractionId) {
+        const imageMap = {
+            'fairy-meadows': 'https://images.unsplash.com/photo-1594736797933-d0f289d3d0e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            'badshahi-mosque': 'https://images.unsplash.com/photo-1587130781383-5a70a8c9e4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            'mohenjo-daro': 'https://images.unsplash.com/photo-1484557985045-edf25e08da73?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            'swat-valley': 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            'hunza-valley': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            'kumrat-valley': 'https://images.unsplash.com/photo-1565955889011-41b8e22b3449?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            'attabad-lake': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+        };
+        return imageMap[attractionId] || 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
+    }
+
+    function extractRegion(text) {
+        if (!text) return 'Pakistan';
+        const cleanText = text.replace('📍', '').trim();
+        return cleanText || 'Pakistan';
+    }
+
+    function extractCategory(text) {
+        if (!text) return 'Sightseeing';
+        const cleanText = text.replace('🏷️', '').trim();
+        return cleanText || 'Sightseeing';
+    }
+
+    function getRegionFromId(attractionId) {
+        const regionMap = {
+            'fairy-meadows': 'Northern Areas',
+            'badshahi-mosque': 'Punjab',
+            'mohenjo-daro': 'Sindh',
+            'swat-valley': 'KPK',
+            'hunza-valley': 'Northern Areas',
+            'kumrat-valley': 'KPK',
+            'attabad-lake': 'Northern Areas'
+        };
+        return regionMap[attractionId] || 'Pakistan';
+    }
+
+    function getCategoryFromId(attractionId) {
+        const categoryMap = {
+            'fairy-meadows': 'Hiking & Nature',
+            'badshahi-mosque': 'Historical & Religious',
+            'mohenjo-daro': 'Archaeological',
+            'swat-valley': 'Valley & Nature',
+            'hunza-valley': 'Valley & Culture',
+            'kumrat-valley': 'Valley & Hiking',
+            'attabad-lake': 'Lake & Nature'
+        };
+        return categoryMap[attractionId] || 'Sightseeing';
+    }
+
+    function createMongoDBModal(attraction, attractionId) {
+        const modal = document.createElement('div');
+        modal.id = 'explore-modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        `;
+
+        const detailedInfo = attraction.detailed_info || {};
+        const isSaved = savedAttractions.some(item => item.id === attractionId);
+
+        const saveButtonHTML = isSaved ? `
+            <button onclick="saveToWishlist('${attraction.name}', '${attractionId}')"
+                    style="background: #fce4ec; color: #e91e63; border: 2px solid #e91e63;
+                           padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;
+                           display: flex; align-items: center; gap: 8px; transition: all 0.3s;">
+                <i class="fas fa-heart" style="color: #e91e63;"></i> Saved
+            </button>
+        ` : `
+            <button onclick="saveToWishlist('${attraction.name}', '${attractionId}')"
+                    style="background: white; color: var(--dark); border: 2px solid var(--primary);
+                           padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;
+                           display: flex; align-items: center; gap: 8px; transition: all 0.3s;">
+                <i class="fas fa-heart"></i> Save to Wishlist
+            </button>
+        `;
+
+        modal.innerHTML = `
+            <div style="background: white; width: 100%; max-width: 900px; max-height: 90vh;
+                        border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+                        animation: slideUp 0.4s ease; position: relative;">
+
+                <div style="position: relative; height: 250px; overflow: hidden;">
+                    <img src="${attraction.image_url || getDefaultImage(attractionId)}"
+                         alt="${attraction.name}"
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0;
+                                background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+                                padding: 25px; color: white;">
+                        <h1 style="margin: 0; font-size: 2.2rem; font-weight: 800;">${attraction.name}</h1>
+                        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                            <span style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;">
+                                <i class="fas fa-map-marker-alt"></i> ${attraction.region}
+                            </span>
+                            <span style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;">
+                                <i class="fas fa-tag"></i> ${attraction.category}
+                            </span>
+                        </div>
+                    </div>
+                    <button onclick="closeExploreModal()"
+                            style="position: absolute; right: 20px; top: 20px; background: rgba(0,0,0,0.7);
+                                   color: white; border: none; width: 40px; height: 40px; border-radius: 50%;
+                                   font-size: 1.1rem; cursor: pointer; display: flex;
+                                   align-items: center; justify-content: center;">
+                        ×
+                    </button>
+                </div>
+
+                <div style="padding: 30px; overflow-y: auto; max-height: calc(90vh - 250px);">
+                    <div style="margin-bottom: 25px;">
+                        <h2 style="color: var(--dark); border-bottom: 3px solid var(--primary);
+                                   padding-bottom: 10px; margin-bottom: 15px; font-size: 1.3rem;">
+                            <i class="fas fa-info-circle"></i> About ${attraction.name}
+                        </h2>
+                        <p style="line-height: 1.7; font-size: 1.05rem; color: #444;">
+                            ${attraction.description}
+                        </p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                                gap: 20px; margin-bottom: 25px;">
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary);">
+                            <div style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div style="font-weight: 600; color: var(--dark); margin-bottom: 5px;">Opening Hours</div>
+                            <div style="color: #666;">${detailedInfo.opening_hours}</div>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid var(--secondary);">
+                            <div style="font-size: 2rem; color: var(--secondary); margin-bottom: 10px;">
+                                <i class="fas fa-ticket-alt"></i>
+                            </div>
+                            <div style="font-weight: 600; color: var(--dark); margin-bottom: 5px;">Entrance Fee</div>
+                            <div style="color: #666;">${detailedInfo.entrance_fee}</div>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent);">
+                            <div style="font-size: 2rem; color: var(--accent); margin-bottom: 10px;">
+                                <i class="fas fa-signal"></i>
+                            </div>
+                            <div style="font-weight: 600; color: var(--dark); margin-bottom: 5px;">Difficulty</div>
+                            <div style="color: #666;">${detailedInfo.difficulty_level}</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                            <i class="fas fa-hiking"></i> Unique Activities at ${attraction.name}
+                        </h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${detailedInfo.activities.map(activity => `
+                                <span style="background: var(--primary); color: white; padding: 8px 16px;
+                                            border-radius: 20px; font-size: 0.9rem; font-weight: 500;">
+                                    ${activity}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div style="background: #fff8e1; padding: 20px; border-radius: 10px; margin-bottom: 25px;
+                                border-left: 5px solid var(--accent);">
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                            <i class="fas fa-lightbulb"></i> Specific Tips for ${attraction.name}
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px;">
+                            ${detailedInfo.essential_tips.map((tip, index) => `
+                                <div style="display: flex; gap: 10px; align-items: flex-start;">
+                                    <div style="background: var(--accent); color: var(--dark); width: 24px; height: 24px;
+                                                border-radius: 50%; display: flex; align-items: center; justify-content: center;
+                                                font-weight: bold; font-size: 0.9rem; flex-shrink: 0;">
+                                        ${index + 1}
+                                    </div>
+                                    <div style="color: #444; line-height: 1.5; font-size: 0.95rem;">
+                                        ${tip}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                            <i class="fas fa-suitcase"></i> What to Bring to ${attraction.name}
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;">
+                            ${detailedInfo.things_to_carry.map(item => `
+                                <div style="display: flex; align-items: center; gap: 8px; padding: 10px;
+                                            background: #e3f2fd; border-radius: 8px;">
+                                    <i class="fas fa-check" style="color: var(--primary);"></i>
+                                    <span style="font-size: 0.95rem;">${item}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border); padding-top: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3 style="color: var(--dark); margin-bottom: 10px; font-size: 1.1rem;">
+                                    <i class="fas fa-share-alt"></i> Share ${attraction.name}
+                                </h3>
+                                <div style="display: flex; gap: 10px;">
+                                    <button onclick="shareOnSocial('${attraction.name}', '${attractionId}', 'facebook')"
+                                            style="background: #1877F2; color: white; border: none; width: 40px; height: 40px;
+                                                   border-radius: 50%; cursor: pointer; font-size: 1.1rem;">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </button>
+                                    <button onclick="shareOnSocial('${attraction.name}', '${attractionId}', 'twitter')"
+                                            style="background: #1DA1F2; color: white; border: none; width: 40px; height: 40px;
+                                                   border-radius: 50%; cursor: pointer; font-size: 1.1rem;">
+                                        <i class="fab fa-twitter"></i>
+                                    </button>
+                                    <button onclick="shareOnSocial('${attraction.name}', '${attractionId}', 'whatsapp')"
+                                            style="background: #25D366; color: white; border: none; width: 40px; height: 40px;
+                                                   border-radius: 50%; cursor: pointer; font-size: 1.1rem;">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                ${saveButtonHTML}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) closeExploreModal();
+        });
+    }
+
+    function createPackageModal(pkg, packageId) {
+        const detailedInfo = pkg.detailed_info || {};
+        const isSaved = savedPackages.some(item => item.id === packageId);
+
+        const saveButtonHTML = isSaved ? `
+            <button onclick="savePackageToWishlist('${pkg.name}', '${packageId}')"
+                    style="background: #e8f5e9; color: #4CAF50; border: 2px solid #4CAF50;
+                           padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;
+                           display: flex; align-items: center; gap: 8px; transition: all 0.3s;">
+                <i class="fas fa-bookmark" style="color: #4CAF50;"></i> Saved
+            </button>
+        ` : `
+            <button onclick="savePackageToWishlist('${pkg.name}', '${packageId}')"
+                    style="background: white; color: var(--dark); border: 2px solid var(--primary);
+                           padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;
+                           display: flex; align-items: center; gap: 8px; transition: all 0.3s;">
+                <i class="fas fa-bookmark"></i> Save Package
+            </button>
+        `;
+
+        const modal = document.createElement('div');
+        modal.id = 'package-modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        `;
+
+        modal.innerHTML = `
+            <div style="background: white; width: 100%; max-width: 1000px; max-height: 90vh;
+                        border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+                        animation: slideUp 0.4s ease; position: relative;">
+
+                <div style="position: relative; height: 250px; overflow: hidden;">
+                    <img src="${pkg.image_url || 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}"
+                         alt="${pkg.name}"
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0;
+                                background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+                                padding: 25px; color: white;">
+                        <h1 style="margin: 0; font-size: 2.2rem; font-weight: 800;">${pkg.name}</h1>
+                        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                            <span style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;">
+                                <i class="far fa-clock"></i> ${pkg.duration_days} Days
+                            </span>
+                            <span style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;">
+                                <i class="fas fa-map-marker-alt"></i> ${pkg.region}
+                            </span>
+                            <span style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;">
+                                <i class="fas fa-tag"></i> ${pkg.category}
+                            </span>
+                        </div>
+                    </div>
+                    <button onclick="closePackageModal()"
+                            style="position: absolute; right: 20px; top: 20px; background: rgba(0,0,0,0.7);
+                                   color: white; border: none; width: 40px; height: 40px; border-radius: 50%;
+                                   font-size: 1.1rem; cursor: pointer; display: flex;
+                                   align-items: center; justify-content: center;">
+                        ×
+                    </button>
+                </div>
+
+                <div style="padding: 30px; overflow-y: auto; max-height: calc(90vh - 250px);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                        <div>
+                            <h2 style="color: var(--dark); font-size: 1.3rem; margin-bottom: 10px;">
+                                <i class="fas fa-info-circle"></i> Package Overview
+                            </h2>
+                            <p style="color: #666; line-height: 1.6;">${pkg.description}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">
+                                PKR ${pkg.price.toLocaleString()}
+                            </div>
+                            <div style="color: #666; font-size: 0.9rem;">Total package price</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                            <i class="fas fa-check-circle"></i> What's Included
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">
+                            ${detailedInfo.inclusions.map(item => `
+                                <div style="display: flex; align-items: center; gap: 10px; padding: 12px;
+                                            background: #f0f8ff; border-radius: 8px;">
+                                    <i class="fas fa-check" style="color: #4CAF50;"></i>
+                                    <span style="font-weight: 500;">${item}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                            <i class="fas fa-calendar-alt"></i> Daily Activities
+                        </h3>
+                        <div style="background: #f9f9f9; border-radius: 10px; padding: 20px;">
+                            ${detailedInfo.activities.map((activity, index) => `
+                                <div style="padding: 15px 0; ${index < detailedInfo.activities.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <div style="background: var(--primary); color: white; width: 30px; height: 30px;
+                                                        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+                                                        font-weight: bold;">${index + 1}</div>
+                                            <div>
+                                                <div style="font-weight: 600; color: var(--dark);">${activity.name}</div>
+                                                <div style="color: #666; font-size: 0.9rem; margin-top: 5px;">
+                                                    <i class="far fa-clock"></i> ${activity.duration} • ${activity.type}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px;">
+                        <div>
+                            <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                                <i class="fas fa-hotel"></i> Recommended Hotels
+                            </h3>
+                            ${(detailedInfo.hotels && detailedInfo.hotels.length > 0 ?
+                                detailedInfo.hotels.slice(0, 3).map(hotel => `
+                                    <div style="display: flex; gap: 12px; padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px;">
+                                        <div style="width: 60px; height: 60px; border-radius: 6px; overflow: hidden; flex-shrink: 0;">
+                                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                                 alt="${hotel.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                        <div>
+                                            <div style="font-weight: 600; color: var(--dark);">${hotel.name}</div>
+                                            <div style="color: #666; font-size: 0.85rem; margin-top: 4px;">${hotel.amenities ? hotel.amenities.slice(0, 3).join(', ') : 'Comfortable stay'}</div>
+                                        </div>
+                                    </div>
+                                `).join('') : `
+                                <div style="text-align: center; padding: 20px; color: #666; background: #f8f9fa; border-radius: 8px;">
+                                    <i class="fas fa-hotel" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.5;"></i>
+                                    <p>Quality hotels included in package</p>
+                                </div>
+                            `)}
+                        </div>
+
+                        <div>
+                            <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                                <i class="fas fa-mountain"></i> Key Attractions
+                            </h3>
+                            ${(detailedInfo.attractions && detailedInfo.attractions.length > 0 ?
+                                detailedInfo.attractions.slice(0, 3).map(attr => `
+                                    <div style="display: flex; gap: 12px; padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px;">
+                                        <div style="width: 60px; height: 60px; border-radius: 6px; overflow: hidden; flex-shrink: 0;">
+                                            <img src="${attr.image_url || 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'}"
+                                                 alt="${attr.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                        <div>
+                                            <div style="font-weight: 600; color: var(--dark);">${attr.name}</div>
+                                            <div style="color: #666; font-size: 0.85rem; margin-top: 4px;">${attr.category || 'Sightseeing'}</div>
+                                        </div>
+                                    </div>
+                                `).join('') : `
+                                <div style="text-align: center; padding: 20px; color: #666; background: #f8f9fa; border-radius: 8px;">
+                                    <i class="fas fa-mountain" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.5;"></i>
+                                    <p>Amazing attractions included</p>
+                                </div>
+                            `)}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.2rem;">
+                            <i class="fas fa-users"></i> Best For
+                        </h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${detailedInfo.best_for.map(group => `
+                                <span style="background: #e3f2fd; color: #1976D2; padding: 8px 16px; border-radius: 20px;
+                                             font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-user-check"></i> ${group}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border); padding-top: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3 style="color: var(--dark); margin-bottom: 10px; font-size: 1.1rem;">
+                                    <i class="fas fa-share-alt"></i> Share This Package
+                                </h3>
+                                <div style="display: flex; gap: 10px;">
+                                    <button onclick="sharePackage('${pkg.name}', '${packageId}', 'facebook')"
+                                            style="background: #1877F2; color: white; border: none; width: 40px; height: 40px;
+                                                   border-radius: 50%; cursor: pointer; font-size: 1.1rem;">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </button>
+                                    <button onclick="sharePackage('${pkg.name}', '${packageId}', 'twitter')"
+                                            style="background: #1DA1F2; color: white; border: none; width: 40px; height: 40px;
+                                                   border-radius: 50%; cursor: pointer; font-size: 1.1rem;">
+                                        <i class="fab fa-twitter"></i>
+                                    </button>
+                                    <button onclick="sharePackage('${pkg.name}', '${packageId}', 'whatsapp')"
+                                            style="background: #25D366; color: white; border: none; width: 40px; height: 40px;
+                                                   border-radius: 50%; cursor: pointer; font-size: 1.1rem;">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 15px;">
+                                ${saveButtonHTML}
+                                <button onclick="bookPackage('${packageId}')"
+                                        style="background: var(--primary); color: white; border: none;
+                                               padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;
+                                               display: flex; align-items: center; gap: 8px; font-size: 1rem;">
+                                    <i class="fas fa-shopping-cart"></i> Book Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) closePackageModal();
+        });
+    }
+
+    function closePackageModal() {
+        const modal = document.getElementById('package-modal');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    function sharePackage(name, packageId, platform) {
+        const url = `${window.location.origin}/package/${packageId}`;
+        const text = `Check out ${name} - an amazing travel package in Pakistan!`;
+
+        let shareUrl = '';
+        switch(platform) {
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                break;
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+                break;
+            case 'whatsapp':
+                shareUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`;
+                break;
+        }
+
+        window.open(shareUrl, '_blank');
+        showToast(`Sharing ${name} on ${platform}`, 'success');
+    }
+
+    function bookPackage(packageId) {
+        showToast(`Booking package: ${packageId}. This would redirect to booking page.`, 'success');
+    }
+
+    function shareOnSocial(name, attractionId, platform) {
+        const url = `${window.location.origin}/attraction/${attractionId}`;
+        const text = `Check out ${name} - an amazing destination in Pakistan!`;
+
+        let shareUrl = '';
+        switch(platform) {
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                break;
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+                break;
+            case 'whatsapp':
+                shareUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`;
+                break;
+        }
+
+        window.open(shareUrl, '_blank');
+        showToast(`Sharing ${name} on ${platform}`, 'success');
+    }
+
+    function showLoadingForModal() {
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'modal-loading';
+        loadingOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            flex-direction: column;
+            gap: 20px;
+        `;
+        loadingOverlay.innerHTML = `
+            <div class="spinner" style="border-color: white; border-top-color: var(--primary); width: 60px; height: 60px;"></div>
+            <div style="color: white; font-size: 1.1rem; font-weight: 500;">Loading unique details for this attraction...</div>
+        `;
+        document.body.appendChild(loadingOverlay);
+    }
+
+    function hideLoadingForModal() {
+        const loadingOverlay = document.getElementById('modal-loading');
+        if (loadingOverlay) loadingOverlay.remove();
+    }
+
+    function closeExploreModal() {
+        const modal = document.getElementById('explore-modal');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    function loadSavedAttractions() {
+        try {
+            const saved = localStorage.getItem('pakistanTravelSavedAttractions');
+            if (saved) {
+                savedAttractions = JSON.parse(saved);
+                updateSavedCount();
+            }
+        } catch (error) {
+            console.error('Error loading saved attractions:', error);
+            savedAttractions = [];
+        }
+    }
+
+    function updateSavedCount() {
+        const savedCount = savedAttractions.length;
+        const countElement = document.getElementById('saved-count');
+        if (countElement) {
+            countElement.textContent = savedCount;
+            if (savedCount === 0) {
+                countElement.style.display = 'none';
+            } else {
+                countElement.style.display = 'inline-block';
+            }
+        }
+    }
+
+    function updateSaveButtonInModal(attractionId, isSaved) {
+        const modal = document.getElementById('explore-modal');
+        if (!modal) return;
+
+        const saveButton = modal.querySelector('button[onclick*="saveToWishlist"]');
+        if (saveButton) {
+            if (isSaved) {
+                saveButton.innerHTML = '<i class="fas fa-heart" style="color: #e91e63; margin-right: 8px;"></i> Saved';
+                saveButton.style.background = '#fce4ec';
+                saveButton.style.color = '#e91e63';
+                saveButton.style.borderColor = '#e91e63';
+            } else {
+                saveButton.innerHTML = '<i class="fas fa-heart" style="margin-right: 8px;"></i> Save to Wishlist';
+                saveButton.style.background = 'white';
+                saveButton.style.color = 'var(--dark)';
+                saveButton.style.borderColor = 'var(--primary)';
+            }
+        }
+    }
+
+    function displaySavedAttractions() {
+        const savedContainer = document.getElementById('saved-attractions-container');
+        const noSavedElement = document.getElementById('no-saved-attractions');
+        const attractionsContainer = document.getElementById('attractions-container');
+
+        if (!savedContainer || !noSavedElement) return;
+
+        if (attractionsContainer) {
+            attractionsContainer.style.display = 'none';
+        }
+
+        if (savedAttractions.length === 0) {
+            savedContainer.style.display = 'none';
+            noSavedElement.style.display = 'block';
+            return;
+        }
+
+        savedContainer.style.display = 'grid';
+        noSavedElement.style.display = 'none';
+
+        savedContainer.innerHTML = savedAttractions.map(attraction => `
+            <div class="card">
+                <div style="position: absolute; top: 15px; left: 15px; background: #e91e63; color: white;
+                           padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+                           display: flex; align-items: center; gap: 6px; z-index: 2;">
+                    <i class="fas fa-heart"></i>
+                    Saved
+                </div>
+                <img src="${attraction.image || getDefaultImage(attraction.id)}"
+                     alt="${attraction.name}" class="card-img">
+                <div class="card-content">
+                    <h3>${attraction.name}</h3>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 10px;">
+                        <i class="far fa-calendar"></i> Saved on ${new Date(attraction.dateAdded).toLocaleDateString()}
+                    </p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-heart" style="color: #e91e63;"></i> In Your List</span>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline" onclick="removeFromSaved('${attraction.id}')"
+                                style="border-color: #e91e63; color: #e91e63; padding: 8px 16px;">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                        <button class="btn btn-primary" onclick="showAttractionDetails('${attraction.id}')" style="padding: 8px 16px;">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function removeFromSaved(attractionId) {
+        const attraction = savedAttractions.find(item => item.id === attractionId);
+        if (attraction) {
+            savedAttractions = savedAttractions.filter(item => item.id !== attractionId);
+            localStorage.setItem('pakistanTravelSavedAttractions', JSON.stringify(savedAttractions));
+            updateSavedCount();
+            displaySavedAttractions();
+            showToast(`Removed from saved attractions`, 'info');
+        }
+    }
+
+    function showAllAttractions() {
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelector('[data-tab="all-attractions"]').classList.add('active');
+        document.getElementById('saved-attractions-tab').classList.remove('active');
+
+        const attractionsContainer = document.getElementById('attractions-container');
+        const savedContainer = document.getElementById('saved-attractions-container');
+        const noSavedElement = document.getElementById('no-saved-attractions');
+
+        if (attractionsContainer) attractionsContainer.style.display = 'grid';
+        if (savedContainer) savedContainer.style.display = 'none';
+        if (noSavedElement) noSavedElement.style.display = 'none';
+    }
+
+    function showSavedAttractions() {
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelector('[data-tab="all-attractions"]').classList.remove('active');
+        document.getElementById('saved-attractions-tab').classList.add('active');
+
+        displaySavedAttractions();
+    }
+
+    function addSavedAttractionsStyles() {}
+
+    function loadSavedPackages() {
+        try {
+            const saved = localStorage.getItem('pakistanTravelSavedPackages');
+            if (saved) {
+                savedPackages = JSON.parse(saved);
+                updateSavedPackagesCount();
+            }
+        } catch (error) {
+            console.error('Error loading saved packages:', error);
+            savedPackages = [];
+        }
+    }
+
+    function updateSavedPackagesCount() {
+        const savedCount = savedPackages.length;
+        const countElement = document.getElementById('saved-packages-count');
+        if (countElement) {
+            countElement.textContent = savedCount;
+            if (savedCount === 0) {
+                countElement.style.display = 'none';
+            } else {
+                countElement.style.display = 'inline-block';
+            }
+        }
+    }
+
+    function updateSavePackageButtonInModal(packageId, isSaved) {
+        const modal = document.getElementById('package-modal');
+        if (!modal) return;
+
+        const saveButton = modal.querySelector('button[onclick*="savePackageToWishlist"]');
+        if (saveButton) {
+            if (isSaved) {
+                saveButton.innerHTML = '<i class="fas fa-bookmark" style="color: #4CAF50;"></i> Saved';
+                saveButton.style.background = '#e8f5e9';
+                saveButton.style.color = '#4CAF50';
+                saveButton.style.borderColor = '#4CAF50';
+            } else {
+                saveButton.innerHTML = '<i class="fas fa-bookmark"></i> Save Package';
+                saveButton.style.background = 'white';
+                saveButton.style.color = 'var(--dark)';
+                saveButton.style.borderColor = 'var(--primary)';
+            }
+        }
+    }
+
+    function showAllPackages() {
+        document.getElementById('packages-tabs-section').style.display = 'none';
+        document.getElementById('packages-container').style.display = 'grid';
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelector('[data-tab="all"]').classList.add('active');
+    }
+
+    function showSavedPackages() {
+        document.getElementById('packages-tabs-section').style.display = 'flex';
+        document.getElementById('packages-container').style.display = 'none';
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        document.getElementById('saved-packages-tab').classList.add('active');
+        displaySavedPackages();
+    }
+
+    function displaySavedPackages() {
+        if (savedPackages.length === 0) {
+            showToast('No saved packages yet. Click "Save Package" on any package.', 'info');
+        } else {
+            showToast(`You have ${savedPackages.length} saved packages.`, 'success');
+        }
+    }
+
+    function savePackage(packageId) {
+        showToast(`Package "${packageId}" saved to your favorites!`, 'success');
+    }
+
+    function generateNewPackage() {
+        document.getElementById('custom-package-result').style.display = 'none';
+        document.getElementById('custom-package-form').reset();
+        document.getElementById('custom').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.addEventListener('load', function() {
+        console.log('🏁 Website fully loaded');
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+    </script>
+</body>
+</html>
